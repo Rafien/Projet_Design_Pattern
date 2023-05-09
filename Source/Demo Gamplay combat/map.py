@@ -1,6 +1,7 @@
 import pygame,sys,csv
 from section import Section
 from Entity import Entity
+import random
 class Map:
     def __init__(self,res,win):
         self.res = res
@@ -28,10 +29,10 @@ class Map:
                 type = mp_matrx[ny][nx]
 
                 matrx[ny][nx] = Section(x,y,self.win,type,0)
-                if int(type) == 3:                
-                    entity = Entity(matrx[ny][nx],self.win)
-                    matrx[ny][nx].setEntity(entity)
-                    entity.render()
+                seed = random.randint(0,100)
+                if seed < 20:
+                    ressource = self.__generate_ressource()
+                    matrx[ny][nx].add_ressource(ressource)
                 y += 30
                 ym +=1
             y = 0
