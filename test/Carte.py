@@ -3,7 +3,7 @@ import random
 TAILLE_MIN = 5
 TAILLE_MAX = 10
 ressources = ["P", "B", "N"]
-pourcentages = [0.2, 0.3, 0.5]
+pourcentages = [0.1, 0.15, 0.25]
 
 class Carte:
     def __init__(self):
@@ -15,7 +15,7 @@ class Carte:
 #Cree une carte sous forme de liste de liste
     def creer_carte(self):
         for i in range(self.axe_y):
-            ligne = ["X"] * self.axe_x
+            ligne = [" "] * self.axe_x
             self.carte.append(ligne)
             i+=1
 
@@ -39,7 +39,7 @@ class Carte:
                 while True:
                     x = random.randint(0, hauteur - 1)
                     y = random.randint(0, largeur - 1)
-                    if self.carte[x][y] == "X":
+                    if self.carte[x][y] == " ":
                         self.carte[x][y] = ressource
                         break
 
