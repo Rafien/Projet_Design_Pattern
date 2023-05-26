@@ -13,7 +13,7 @@ class Unite():
         self.metier = metier[self.metier_index]
         self.outil = outils[self.metier_index]
         #Stats
-        self.vitesse = 3
+        self.vitesse = 5
         self.cout_nourriture = 1
         self.xp = 0
         #decorateur
@@ -25,7 +25,7 @@ class Unite():
     
     def rammasserRessources(self, inventaire, carte):
         if self.isOnRessourcesRecuperables(carte):
-            # Ajouter les ressources au stock
+            # Ajouter les ressources au stock (a modifier)
             inventaire.append(carte.type_ressource(self.pos_unit_x, self.pos_unit_y))
             # Supprimer les ressources de la case
             print("Vous avez ramassé "+ carte.type_ressource(self.pos_unit_x, self.pos_unit_y) +"!")

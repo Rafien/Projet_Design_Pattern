@@ -53,10 +53,10 @@ class Carte:
 #return true si la case a des ressources 
     def case_avec_ressources(self, x , y):
         temp = self.recuperer_ressource_de_string(x, y)
-        print("Vous êtes sur la case", x, y)
+        #print("Vous êtes sur la case", x, y)
         for i in range(len(ressources)):
             if temp == ressources[i]:
-                print("Vous avez trouvé "+ ressources[i] +"!")
+                #print("Vous avez trouvé "+ ressources[i] +"!")
                 return True
         return False    
 #return le type de ressource sur la case             
@@ -74,10 +74,10 @@ class Carte:
     
     def recuperer_ressource_de_string(self, x, y):
         if len(self.carte[x][y]) == 2:
-            print(self.carte[x][y][1])
+            #print(self.carte[x][y][1])
             return self.carte[x][y][1]
         else:
-            print(self.carte[x][y][0])
+            #print(self.carte[x][y][0])
             return self.carte[x][y][0]
 
     
