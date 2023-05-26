@@ -52,23 +52,33 @@ class Carte:
 
 #return true si la case a des ressources 
     def case_avec_ressources(self, x , y):
+        temp = self.recuperer_ressource_de_string(x, y)
         #print("Vous êtes sur la case", x-1, y-1)
         #print("Cette case contient", self.carte[y-1][x-1])
         for i in range(len(ressources)):
-            if self.carte[x-1][y-1] == ressources[i]:
+            if temp == ressources[i]:
                 #print("Vous avez trouvé "+ ressources[i] +"!")
                 return True
         return False    
 #return le type de ressource sur la case             
     def type_ressource(self, x , y):
+        temp = self.recuperer_ressource_de_string(x, y)
         for i in range(len(ressources)):
-            if self.carte[x-1][y-1] == ressources[i]:
+            if temp == ressources[i]:
                 return ressources[i]
 
-    def index_ressource(self, x , y):        
+    def index_ressource(self, x , y):
+        temp = self.recuperer_ressource_de_string(x, y)
         for i in range(len(ressources)):
-            if self.carte[x-1][y-1] == ressources[i]:
+            if temp == ressources[i]:
                 return i
+    
+    def recuperer_ressource_de_string(self, x, y):
+        if len(self.carte[x-1][y-1]) == 2:
+            return self.carte[x-1][y-1][1]
+        else:
+            return self.carte[x-1][y-1][0]
+
     
     def supprimer_ressource(self, x , y):
         # si j'ai une unité je laisse l'unite
@@ -88,5 +98,12 @@ class Carte:
         if self.carte[unite.pos_unit_x][unite.pos_unit_y] == " ":
             self.carte[unite.pos_unit_x][unite.pos_unit_y] = unite_aff
         else:
-            self.carte[unite.pos_unit_x][unite.pos_unit_y] = unite_aff + self.carte[unite.pos_unit_x-1][unite.pos_unit_y-1]
+            self.carte[unite.pos_unit_x][unite.pos_unit_y] = unite_aff + self.carte[unite.pos_unit_x][unite.pos_unit_y]
+        self.afficher_carte()
 
+    def supprimer_unite(self, unite):
+        if self.carte[unite.pos_unit_x][unite.pos_unit_y] != unite_aff:
+            #lire case et recuperer ressource
+            self.carte[unite.pos_unit_x][unite.pos_unit_y] = self.type_ressource(unite.pos_unit_x, unite.pos_unit_y)
+        else:
+            self.carte[unite.pos_unit_x][unite.pos_unit_y] = " "

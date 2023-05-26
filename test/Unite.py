@@ -13,7 +13,7 @@ class Unite():
         self.metier = metier[self.metier_index]
         self.outil = outils[self.metier_index]
         #Stats
-        self.vitesse = 1
+        self.vitesse = 3
         self.cout_nourriture = 1
         self.xp = 0
         #decorateur
@@ -62,3 +62,52 @@ class Unite():
     def isExpert(self):
         if self.xp >= 5:
             self.Expert = True
+
+    def seDeplacer(self, inventaire, carte):
+        for _ in range(self.vitesse):
+        # lire la direction dans la console
+            direction = input("Dans quelle direction voulez-vous aller? (h, b, g, d)")
+        # si la direction est h
+            if direction == "h":
+                self.deplacerHaut()
+        # si la direction est b
+            elif direction == "b":
+                self.deplacerBas(carte)
+        # si la direction est g
+            elif direction == "g":
+                self.deplacerGauche()
+
+        # si la direction est d
+            elif direction == "d":
+                self.deplacerDroite(carte)
+            carte.afficher_unite(self)
+            self.rammasserRessources(inventaire, carte)
+
+
+    def deplacerHaut(self):
+        #verifier out of range
+        if self.pos_unit_x == 0:
+            print("Vous ne pouvez pas aller plus haut!")
+        else:
+            self.pos_unit_x -= 1
+    
+    def deplacerBas(self, carte):
+        #verifier out of range
+        if self.pos_unit_x == carte.axe_x-1:
+            print("Vous ne pouvez pas aller plus bas!")
+        else:
+            self.pos_unit_x += 1
+    
+    def deplacerGauche(self):
+        #verifier out of range
+        if self.pos_unit_y == 0:
+            print("Vous ne pouvez pas aller plus à gauche!")
+        else:
+            self.pos_unit_y -= 1
+
+    def deplacerDroite(self, carte):
+        #verifier out of range
+        if self.pos_unit_y == carte.axe_y-1:
+            print("Vous ne pouvez pas aller plus à droite!")
+        else:
+            self.pos_unit_y += 1

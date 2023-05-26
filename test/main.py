@@ -17,6 +17,6 @@ def test_unite():
 
 test_carte()
 carte.afficher_unite(unite)
-carte.afficher_carte()
 test_unite()
-carte.afficher_carte()
+# carte.afficher_carte()
+unite.seDeplacer(inventaire, carte)
