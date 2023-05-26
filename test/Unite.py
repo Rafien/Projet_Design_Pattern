@@ -19,9 +19,9 @@ class Unite():
             # Supprimer les ressources de la case
             return 0
             
-    def isOnRessourcesRecuperables(self):
+    def isOnRessourcesRecuperables(self, carte):
         # Vérifier si la case contient des ressources récupérables
-        if self.isOnRessources() and self.isBonMetier():
+        if self.isOnRessources(carte) and self.isBonMetier(carte):
             return True
         
     def isOnRessources(self, carte):

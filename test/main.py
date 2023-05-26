@@ -13,9 +13,7 @@ def test_carte():
     carte.type_ressource(5,5)
 
 def test_unite():
-    unite.isOnRessources(carte)
-    unite.isBonMetier(carte)
-    #unite.isOnRessourcesRecuperables()
+    unite.isOnRessourcesRecuperables(carte)
     #unite.rammasserRessources()
 
 
