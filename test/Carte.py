@@ -56,5 +56,4 @@ class Carte:
     def type_ressource(self, x , y):
         for i in range(len(ressources)):
             if self.carte[y-1][x-1] == ressources[i]:
-                print("Vous avez trouvé "+ ressources[i] +"!")
                 return ressources[i]
