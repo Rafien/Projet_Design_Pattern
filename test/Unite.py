@@ -3,10 +3,11 @@ import random
 metier = ["mineur", "bucheron", "paysan"]
 
 class Unite():
-    def __init__(self):
-        self.pos_unit_x = 2
-        self.pos_unit_y = 2
-        
+    def __init__(self, carte):
+        #Position
+        self.pos_unit_x = random.randint(0,carte.axe_x-1)
+        self.pos_unit_y = random.randint(0,carte.axe_y-1)
+        #Metier
         self.metier_index = random.randint(0,2)
         self.metier = metier[self.metier_index]
 
@@ -21,7 +22,7 @@ class Unite():
     
     # Vérifier si la case contient des ressources récupérables
     def isOnRessourcesRecuperables(self, carte):
-        
+        print("Vous êtes sur la case", self.pos_unit_x, self.pos_unit_y)
         if self.isOnRessources(carte) and self.isBonMetier(carte):
             return True
         

@@ -81,3 +81,6 @@ class Carte:
         for i in range(len(ressources)):
             if self.carte[x-1][y-1] == ressources[i]:
                 return i
+            
+    def afficher_unite(self, unite):
+        self.carte[unite.pos_unit_x][unite.pos_unit_y] = "U"

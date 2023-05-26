@@ -2,7 +2,7 @@ from Carte import Carte
 from Unite import Unite
 
 carte = Carte()
-unite = Unite()
+unite = Unite(carte)
 
 def test_carte():
     carte.creer_carte()
@@ -19,3 +19,5 @@ def test_unite():
 
 test_carte()
 test_unite()
+carte.afficher_unite(unite)
+carte.afficher_carte()
