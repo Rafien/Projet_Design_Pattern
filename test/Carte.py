@@ -6,7 +6,7 @@ TAILLE_MAX = 10
 #Ressources
 ressources = ["P", "B", "N"]
 pourcentages = [0.1, 0.15, 0.25]
-
+unite_aff = "U"
 class Carte:
     def __init__(self):
         #taille de la carte
@@ -52,10 +52,6 @@ class Carte:
 
 #return true si la case a des ressources 
     def case_avec_ressources(self, x , y):
-        #verif index out of range
-        if x > self.axe_x or y > self.axe_y:
-            #print("Vous êtes en dehors de la carte")
-            return False
         #print("Vous êtes sur la case", x-1, y-1)
         #print("Cette case contient", self.carte[y-1][x-1])
         for i in range(len(ressources)):
@@ -65,22 +61,32 @@ class Carte:
         return False    
 #return le type de ressource sur la case             
     def type_ressource(self, x , y):
-        #verif index out of range
-        if x > self.axe_x or y > self.axe_y:
-            #print("Vous êtes en dehors de la carte")
-            return False
         for i in range(len(ressources)):
             if self.carte[x-1][y-1] == ressources[i]:
                 return ressources[i]
 
-    def index_ressource(self, x , y):
-        #verif index out of range
-        if x > self.axe_x or y > self.axe_y:
-            #print("Vous êtes en dehors de la carte")
-            return False
+    def index_ressource(self, x , y):        
         for i in range(len(ressources)):
             if self.carte[x-1][y-1] == ressources[i]:
                 return i
-            
+    
+    def supprimer_ressource(self, x , y):
+        # si j'ai une unité je laisse l'unite
+        if self.carte[x-1][y-1] == unite_aff:
+            self.carte[x-1][y-1] = unite_aff
+        # si j'ai une unite et une ressource je laisse l'unite
+        elif self.carte[x-1][y-1] != " ":
+            self.carte[x-1][y-1] = unite_aff
+        # sinon je laisse vide
+        else:
+            self.carte[x-1][y-1] = " "
+        
+
+
+    #affiche une unité sur la carte a sa position 
     def afficher_unite(self, unite):
-        self.carte[unite.pos_unit_x][unite.pos_unit_y] = "U"
+        if self.carte[unite.pos_unit_x][unite.pos_unit_y] == " ":
+            self.carte[unite.pos_unit_x][unite.pos_unit_y] = unite_aff
+        else:
+            self.carte[unite.pos_unit_x][unite.pos_unit_y] = unite_aff + self.carte[unite.pos_unit_x-1][unite.pos_unit_y-1]
+
