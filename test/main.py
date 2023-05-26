@@ -7,7 +7,8 @@ def test_carte():
     carte.afficher_carte()
     carte.ajouter_ressources()
     carte.afficher_carte()
-    carte.lire_case(5,5)
+    carte.case_avec_ressources(5,5)
+    carte.type_ressource(5,5)
 
 
 test_carte()
