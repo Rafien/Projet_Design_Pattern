@@ -28,6 +28,7 @@ class Unite():
             # Ajouter les ressources au stock
             inventaire.append(carte.type_ressource(self.pos_unit_x, self.pos_unit_y))
             # Supprimer les ressources de la case
+            print("Vous avez ramassé "+ carte.type_ressource(self.pos_unit_x, self.pos_unit_y) +"!")
             carte.supprimer_ressource(self.pos_unit_x, self.pos_unit_y)
             # Augmenter l'xp
             self.xp += 1
@@ -42,7 +43,6 @@ class Unite():
         
     # Vérifier si la case contient des ressources
     def isOnRessources(self, carte):
-        
         if carte.case_avec_ressources(self.pos_unit_x, self.pos_unit_y) == True:
             print("Vous avez trouvé "+ carte.type_ressource(self.pos_unit_x, self.pos_unit_y) +"!")
             return True
@@ -67,6 +67,7 @@ class Unite():
         for _ in range(self.vitesse):
         # lire la direction dans la console
             direction = input("Dans quelle direction voulez-vous aller? (h, b, g, d)")
+            carte.supprimer_unite(self)
         # si la direction est h
             if direction == "h":
                 self.deplacerHaut()

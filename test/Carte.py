@@ -53,11 +53,10 @@ class Carte:
 #return true si la case a des ressources 
     def case_avec_ressources(self, x , y):
         temp = self.recuperer_ressource_de_string(x, y)
-        #print("Vous êtes sur la case", x-1, y-1)
-        #print("Cette case contient", self.carte[y-1][x-1])
+        print("Vous êtes sur la case", x, y)
         for i in range(len(ressources)):
             if temp == ressources[i]:
-                #print("Vous avez trouvé "+ ressources[i] +"!")
+                print("Vous avez trouvé "+ ressources[i] +"!")
                 return True
         return False    
 #return le type de ressource sur la case             
@@ -74,22 +73,24 @@ class Carte:
                 return i
     
     def recuperer_ressource_de_string(self, x, y):
-        if len(self.carte[x-1][y-1]) == 2:
-            return self.carte[x-1][y-1][1]
+        if len(self.carte[x][y]) == 2:
+            print(self.carte[x][y][1])
+            return self.carte[x][y][1]
         else:
-            return self.carte[x-1][y-1][0]
+            print(self.carte[x][y][0])
+            return self.carte[x][y][0]
 
     
     def supprimer_ressource(self, x , y):
         # si j'ai une unité je laisse l'unite
-        if self.carte[x-1][y-1] == unite_aff:
-            self.carte[x-1][y-1] = unite_aff
+        if self.carte[x][y] == unite_aff:
+            self.carte[x][y] = unite_aff
         # si j'ai une unite et une ressource je laisse l'unite
-        elif self.carte[x-1][y-1] != " ":
-            self.carte[x-1][y-1] = unite_aff
+        elif self.carte[x][y] != " ":
+            self.carte[x][y] = unite_aff
         # sinon je laisse vide
         else:
-            self.carte[x-1][y-1] = " "
+            self.carte[x][y] = " "
         
 
 
