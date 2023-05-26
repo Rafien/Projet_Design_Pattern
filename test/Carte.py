@@ -1,12 +1,15 @@
 import random
 
+#Taille carte
 TAILLE_MIN = 5
 TAILLE_MAX = 10
+#Ressources
 ressources = ["P", "B", "N"]
 pourcentages = [0.1, 0.15, 0.25]
 
 class Carte:
     def __init__(self):
+        #taille de la carte
         self.axe_x = random.randint(TAILLE_MIN,TAILLE_MAX)
         self.axe_y = random.randint(TAILLE_MIN,TAILLE_MAX)
         self.carte = []
@@ -15,7 +18,9 @@ class Carte:
 #Cree une carte sous forme de liste de liste
     def creer_carte(self):
         for i in range(self.axe_y):
+            #creation d'une ligne de la carte
             ligne = [" "] * self.axe_x
+            #ajout de la ligne à la carte
             self.carte.append(ligne)
             i+=1
 
@@ -31,7 +36,7 @@ class Carte:
         largeur = len(self.carte[0])
 
         total_cases = hauteur * largeur
-
+        #calcul du nombre de cases à remplir
         for ressource, pourcentage in zip(ressources, pourcentages):
             nb_cases = int(total_cases * pourcentage)
         
@@ -39,7 +44,9 @@ class Carte:
                 while True:
                     x = random.randint(0, hauteur - 1)
                     y = random.randint(0, largeur - 1)
+                    #verif si la case est vide
                     if self.carte[x][y] == " ":
+                        #ajout de la ressource
                         self.carte[x][y] = ressource
                         break
 
