@@ -1,6 +1,6 @@
 import random
 
-metier = ["bucheron", "mineur", "paysan"]
+metier = ["mineur", "bucheron", "paysan"]
 
 class Unite():
     def __init__(self):
@@ -32,6 +32,7 @@ class Unite():
     
     def isBonMetier(self, carte):
         # Vérifier si le métier du joueur correspond aux ressources
+        print("Votre métier est "+ self.metier)
         if carte.index_ressource(self.pos_unit_x, self.pos_unit_y) == self.metier_index:
             print("Vous avez le bon métier!")
         # Si oui, retourner True

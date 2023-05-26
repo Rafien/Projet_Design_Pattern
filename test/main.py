@@ -18,5 +18,6 @@ def test_unite():
     #unite.isOnRessourcesRecuperables()
     #unite.rammasserRessources()
 
-test_unite()
+
 test_carte()
+test_unite()

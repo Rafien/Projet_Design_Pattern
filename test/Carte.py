@@ -37,8 +37,8 @@ class Carte:
         
             for _ in range(nb_cases):
                 while True:
-                    x = random.randint(0, largeur - 1)
-                    y = random.randint(0, hauteur - 1)
+                    x = random.randint(0, hauteur - 1)
+                    y = random.randint(0, largeur - 1)
                     if self.carte[x][y] == "X":
                         self.carte[x][y] = ressource
                         break
@@ -47,7 +47,7 @@ class Carte:
     def case_avec_ressources(self, x , y):
         #verif index out of range
         if x > self.axe_x or y > self.axe_y:
-            print("Vous êtes en dehors de la carte")
+            #print("Vous êtes en dehors de la carte")
             return False
         #print("Vous êtes sur la case", x-1, y-1)
         #print("Cette case contient", self.carte[y-1][x-1])
@@ -60,7 +60,7 @@ class Carte:
     def type_ressource(self, x , y):
         #verif index out of range
         if x > self.axe_x or y > self.axe_y:
-            print("Vous êtes en dehors de la carte")
+            #print("Vous êtes en dehors de la carte")
             return False
         for i in range(len(ressources)):
             if self.carte[x-1][y-1] == ressources[i]:
@@ -69,7 +69,7 @@ class Carte:
     def index_ressource(self, x , y):
         #verif index out of range
         if x > self.axe_x or y > self.axe_y:
-            print("Vous êtes en dehors de la carte")
+            #print("Vous êtes en dehors de la carte")
             return False
         for i in range(len(ressources)):
             if self.carte[x-1][y-1] == ressources[i]:
