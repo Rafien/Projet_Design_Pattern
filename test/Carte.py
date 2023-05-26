@@ -42,3 +42,10 @@ class Carte:
                     if self.carte[y][x] == "X":
                         self.carte[y][x] = ressource
                         break
+    
+    def lire_case(self, x , y):
+        print("Vous êtes sur la case", x-1, y-1)
+        print("Cette case contient", self.carte[y-1][x-1])
+        for i in range(len(ressources)):
+            if self.carte[y-1][x-1] == ressources[i]:
+                print("Vous avez trouvé "+ ressources[i] +"!")
