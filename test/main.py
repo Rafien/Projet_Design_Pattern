@@ -1,8 +1,10 @@
 from Carte import Carte
+from Unite import Unite
 
+carte = Carte()
+unite = Unite()
 
 def test_carte():
-    carte = Carte()
     carte.creer_carte()
     carte.afficher_carte()
     carte.ajouter_ressources()
@@ -10,5 +12,11 @@ def test_carte():
     carte.case_avec_ressources(5,5)
     carte.type_ressource(5,5)
 
+def test_unite():
+    unite.isOnRessources(carte)
+    unite.isBonMetier(carte)
+    #unite.isOnRessourcesRecuperables()
+    #unite.rammasserRessources()
 
+test_unite()
 test_carte()

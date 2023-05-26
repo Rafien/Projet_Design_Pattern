@@ -14,8 +14,8 @@ class Carte:
 
 #Cree une carte sous forme de liste de liste
     def creer_carte(self):
-        for i in range(self.axe_x):
-            ligne = ["X"] * self.axe_y
+        for i in range(self.axe_y):
+            ligne = ["X"] * self.axe_x
             self.carte.append(ligne)
             i+=1
 
@@ -39,21 +39,38 @@ class Carte:
                 while True:
                     x = random.randint(0, largeur - 1)
                     y = random.randint(0, hauteur - 1)
-                    if self.carte[y][x] == "X":
-                        self.carte[y][x] = ressource
+                    if self.carte[x][y] == "X":
+                        self.carte[x][y] = ressource
                         break
 
 #return true si la case a des ressources 
     def case_avec_ressources(self, x , y):
+        #verif index out of range
+        if x > self.axe_x or y > self.axe_y:
+            print("Vous êtes en dehors de la carte")
+            return False
         #print("Vous êtes sur la case", x-1, y-1)
         #print("Cette case contient", self.carte[y-1][x-1])
         for i in range(len(ressources)):
-            if self.carte[y-1][x-1] == ressources[i]:
+            if self.carte[x-1][y-1] == ressources[i]:
                 #print("Vous avez trouvé "+ ressources[i] +"!")
                 return True
         return False    
 #return le type de ressource sur la case             
     def type_ressource(self, x , y):
+        #verif index out of range
+        if x > self.axe_x or y > self.axe_y:
+            print("Vous êtes en dehors de la carte")
+            return False
         for i in range(len(ressources)):
-            if self.carte[y-1][x-1] == ressources[i]:
+            if self.carte[x-1][y-1] == ressources[i]:
                 return ressources[i]
+
+    def index_ressource(self, x , y):
+        #verif index out of range
+        if x > self.axe_x or y > self.axe_y:
+            print("Vous êtes en dehors de la carte")
+            return False
+        for i in range(len(ressources)):
+            if self.carte[x-1][y-1] == ressources[i]:
+                return i
