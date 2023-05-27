@@ -3,7 +3,7 @@ import random
 #Taille carte
 TAILLE_MIN = 5
 TAILLE_MAX = 10
-#Ressources
+#Ressources foutre en enum pour pouvoir avoir plusieurs ressources par metiers
 ressources = ["P", "B", "N"]
 pourcentages = [0.1, 0.15, 0.25]
 unite_aff = "U"
