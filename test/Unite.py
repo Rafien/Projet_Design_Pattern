@@ -6,8 +6,10 @@ outils = ["pioche", "hache", "houe"]
 class Unite():
     def __init__(self, carte):
         #Position
-        self.pos_unit_x = random.randint(0,carte.axe_x-1)
-        self.pos_unit_y = random.randint(0,carte.axe_y-1)
+        
+        self.pos_unit_x = random.randint(0,carte.axe_y-1)
+        self.pos_unit_y = random.randint(0,carte.axe_x-1)
+        
         #Metier
         self.metier_index = random.randint(0,2)
         self.metier = metier[self.metier_index]

@@ -1,12 +1,11 @@
 from Carte import Carte
 from Unite import Unite
 
-carte = Carte()
+carte = Carte(5,10)
 unite = Unite(carte)
 inventaire = []
 
 def test_carte():
-    carte.creer_carte()
     carte.ajouter_ressources()
 
 
