@@ -102,7 +102,7 @@ class Carte:
             self.carte[unite.pos_unit_x][unite.pos_unit_y] = unite_aff + self.carte[unite.pos_unit_x][unite.pos_unit_y]
         self.afficher_carte()
 
-    def supprimer_unite(self, unite):
+    def supprimer_unite_carte(self, unite):
         if self.carte[unite.pos_unit_x][unite.pos_unit_y] != unite_aff:
             #lire case et recuperer ressource
             self.carte[unite.pos_unit_x][unite.pos_unit_y] = self.type_ressource(unite.pos_unit_x, unite.pos_unit_y)

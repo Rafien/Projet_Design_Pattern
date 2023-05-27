@@ -13,8 +13,8 @@ class Unite():
         self.metier = metier[self.metier_index]
         self.outil = outils[self.metier_index]
         #Stats
-        self.vitesse = 5
-        self.cout_nourriture = 1
+        self.vitesse_base = 5
+        self.cout_nourriture_base = 1
         self.xp = 0
         #decorateur
         self.surCheval = False
@@ -67,7 +67,7 @@ class Unite():
         for _ in range(self.vitesse):
         # lire la direction dans la console
             direction = input("Dans quelle direction voulez-vous aller? (h, b, g, d)")
-            carte.supprimer_unite(self)
+            carte.supprimer_unite_carte(self)
         # si la direction est h
             if direction == "h":
                 self.deplacerHaut()
