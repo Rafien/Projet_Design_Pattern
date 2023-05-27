@@ -1,5 +1,8 @@
 from Carte import Carte
 from Unite import Unite
+from Unite import Mineur
+from Unite import Bucheron
+from Unite import Paysan
 import json
 class Game:
     def __init__(self):
@@ -10,6 +13,9 @@ class Game:
         self.carte.ajouter_ressources(ressource,pourcentage)
         self.metiers = self.getMetiers()
         self.unite = Unite(self.carte, self.metiers)
+        print("random : ", self.unite.metier)
+        self.unite_Mineur = Mineur(self.carte, self.metiers)
+        print( "mineur :" ,self.unite_Mineur.metier)
     def draw(self):
         self.carte.afficher_unite(self.unite)
     def update(self):

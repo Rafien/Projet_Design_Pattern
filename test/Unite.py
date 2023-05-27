@@ -10,8 +10,8 @@ class Unite():
         #Metier
         self.metier_index = random.randint(0,len(metiers)-1)
         self.metier = metiers[self.metier_index]["name"]
-        print("Votre métier est "+ self.metier)
         self.outil = outils[self.metier_index]
+        self.niveau_outil = 1
         #Stats
         self.vitesse_base = 5
         self.cout_nourriture_base = 1
@@ -113,3 +113,27 @@ class Unite():
             print("Vous ne pouvez pas aller plus à droite!")
         else:
             self.pos_unit_y += 1
+
+
+class Bucheron(Unite):
+    def __init__(self, carte, metiers):
+        super().__init__(carte, metiers)
+        self.metier_index = 0
+        self.metier = "Bucheron"
+        self.outil = "hache"
+
+
+class Mineur(Unite):
+    def __init__(self, carte, metiers):
+        super().__init__(carte, metiers)
+        self.metier_index = 1
+        self.metier = "Mineur"
+        self.outil = "pioche"
+
+
+class Paysan(Unite):
+    def __init__(self, carte, metiers):
+        super().__init__(carte, metiers)
+        self.metier_index = 2
+        self.metier = "Paysan"
+        self.outil = "houe"
