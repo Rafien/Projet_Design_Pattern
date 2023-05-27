@@ -1,6 +1,5 @@
 import random
 
-metier = ["mineur", "bucheron", "paysan"]
 outils = ["pioche", "hache", "houe"]
 
 class Unite():
