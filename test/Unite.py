@@ -137,3 +137,34 @@ class Paysan(Unite):
         self.metier_index = 2
         self.metier = "Paysan"
         self.outil = "houe"
+
+class GroupeUnite():
+    def __init__(self, pos_x, pos_y):
+        self.listeUnite = []
+        self.pos_x = pos_x
+        self.pos_y = pos_y
+        self.vitesse = self.calculerVitesse()
+        self.cout_nourriture = self.calculerCoutNourriture()
+
+    def ajouterUnite(self, unite):
+        self.listeUnite.append(unite)
+        self.calculerVitesse()
+        self.calculerCoutNourriture()
+        
+
+    def supprimerUnite(self, unite):
+        self.listeUnite.remove(unite)
+        self.calculerVitesse()
+        self.calculerCoutNourriture()
+    
+    def calculerVitesse(self):
+        self.vitesse = 0
+        for unite in self.listeUnite:
+            self.vitesse += unite.vitesse_base
+        print("vitesse groupe : ", self.vitesse)
+    
+    def calculerCoutNourriture(self):
+        self.cout_nourriture = 0
+        for unite in self.listeUnite:
+            self.cout_nourriture += unite.cout_nourriture_base
+        print("cout_nourriture groupe : ", self.cout_nourriture)
