@@ -4,15 +4,14 @@ metier = ["mineur", "bucheron", "paysan"]
 outils = ["pioche", "hache", "houe"]
 
 class Unite():
-    def __init__(self, carte):
+    def __init__(self, carte, metiers):
         #Position
-        
-        self.pos_unit_x = random.randint(0,carte.axe_y-1)
-        self.pos_unit_y = random.randint(0,carte.axe_x-1)
-        
+        self.pos_unit_x = random.randint(0,carte.axe_x-1)
+        self.pos_unit_y = random.randint(0,carte.axe_y-1)
         #Metier
-        self.metier_index = random.randint(0,2)
-        self.metier = metier[self.metier_index]
+        self.metier_index = random.randint(0,len(metiers)-1)
+        self.metier = metiers[self.metier_index]["name"]
+        print("Votre métier est "+ self.metier)
         self.outil = outils[self.metier_index]
         #Stats
         self.vitesse_base = 5
@@ -25,12 +24,12 @@ class Unite():
 
         
     
-    def rammasserRessources(self, inventaire, carte):
-        if self.isOnRessourcesRecuperables(carte):
+    def rammasserRessources(self, inventaire, carte, ressources):
+        if self.isOnRessourcesRecuperables(carte, ressources):
             # Ajouter les ressources au stock (a modifier)
-            inventaire.append(carte.type_ressource(self.pos_unit_x, self.pos_unit_y))
+            inventaire.append(carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources))
             # Supprimer les ressources de la case
-            print("Vous avez ramassé "+ carte.type_ressource(self.pos_unit_x, self.pos_unit_y) +"!")
+            print("Vous avez ramassé "+ carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources) +"!")
             carte.supprimer_ressource(self.pos_unit_x, self.pos_unit_y)
             # Augmenter l'xp
             self.xp += 1
@@ -38,22 +37,20 @@ class Unite():
             return 0
     
     # Vérifier si la case contient des ressources récupérables
-    def isOnRessourcesRecuperables(self, carte):
+    def isOnRessourcesRecuperables(self, carte, ressources):
         print("Vous êtes sur la case", self.pos_unit_x, self.pos_unit_y)
-        if self.isOnRessources(carte) and self.isBonMetier(carte):
+        if self.isOnRessources(carte, ressources) and self.isBonMetier(carte, ressources):
             return True
         
     # Vérifier si la case contient des ressources
-    def isOnRessources(self, carte):
-        if carte.case_avec_ressources(self.pos_unit_x, self.pos_unit_y) == True:
-            print("Vous avez trouvé "+ carte.type_ressource(self.pos_unit_x, self.pos_unit_y) +"!")
+    def isOnRessources(self, carte, ressources):
+        if carte.case_avec_ressources(self.pos_unit_x, self.pos_unit_y, ressources) == True:
+            print("Vous avez trouvé "+ carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources) +"!")
             return True
     
     # Vérifier si le métier du joueur correspond aux ressources
-    def isBonMetier(self, carte):
-        
-        print("Votre métier est "+ self.metier)
-        if carte.index_ressource(self.pos_unit_x, self.pos_unit_y) == self.metier_index:
+    def isBonMetier(self, carte, ressources):
+        if carte.index_ressource(self.pos_unit_x, self.pos_unit_y, ressources) == self.metier_index:
             print("Vous avez le bon métier!")
         # Si oui, retourner True
             return True
@@ -65,11 +62,11 @@ class Unite():
         if self.xp >= 5:
             self.Expert = True
 
-    def seDeplacer(self, inventaire, carte):
+    def seDeplacer(self, inventaire, carte, ressources):
         for _ in range(self.vitesse_base):
         # lire la direction dans la console
             direction = input("Dans quelle direction voulez-vous aller? (h, b, g, d)")
-            carte.supprimer_unite_carte(self)
+            carte.supprimer_unite_carte(self, ressources)
         # si la direction est h
             if direction == "h":
                 self.deplacerHaut()
@@ -84,7 +81,7 @@ class Unite():
             elif direction == "d":
                 self.deplacerDroite(carte)
             carte.afficher_unite(self)
-            self.rammasserRessources(inventaire, carte)
+            self.rammasserRessources(inventaire, carte, ressources)
 
 
     def deplacerHaut(self):

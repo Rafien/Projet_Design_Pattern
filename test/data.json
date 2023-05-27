@@ -35,5 +35,17 @@
             "recolte": 1,
             "metierid": "2"
         }
+    ],
+    "Metiers": [
+        {
+            "name":"Bucheron"
+        },
+        {
+            "name":"Mineur"
+        },
+        {
+            "name":"Paysan"
+        }
+
     ]
 }

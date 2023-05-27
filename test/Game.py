@@ -4,21 +4,23 @@ import json
 class Game:
     def __init__(self):
         self.carte = Carte(5,10)
-        self.unite = Unite(self.carte)
         self.inventory = []
         self.ressources = self.getressource()
         ressource,pourcentage = self.getrespour()
         self.carte.ajouter_ressources(ressource,pourcentage)
-        print(self.ressources)
+        self.metiers = self.getMetiers()
+        self.unite = Unite(self.carte, self.metiers)
     def draw(self):
         self.carte.afficher_unite(self.unite)
     def update(self):
-        self.unite.seDeplacer(self.inventory, self.carte)
+        self.unite.seDeplacer(self.inventory, self.carte, self.ressources)
         return False
+    # recuperer les ressources dans le json
     def getressource(self):
         with open('data.json') as json_file:
             data = json.load(json_file)
         return data["Ressource"]
+    # recuperer les ressources et les pourcentages
     def getrespour(self):
         pourc = []
         nomenclature = []
@@ -26,3 +28,14 @@ class Game:
             nomenclature.append(result["nomenclature"])
             pourc.append(result["pourcentage"])
         return nomenclature,pourc
+    
+    def getMetiers(self):
+        with open('data.json') as json_file:
+            data = json.load(json_file)
+        return data["Metiers"]
+        
+    # def verifResIdMetier(self):
+    #     for id in self.ressources:
+    #         if id["metierid"] == self.unite.metier_index:
+    #             print("metier :" + self.unite.metier_index + "ressource :" + self.ressources[id]["nomenclature"])
+    #             return True
