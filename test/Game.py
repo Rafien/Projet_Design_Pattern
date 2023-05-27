@@ -3,6 +3,7 @@ from Unite import Unite
 from Unite import Mineur
 from Unite import Bucheron
 from Unite import Paysan
+from Unite import GroupeUnite
 import json
 class Game:
     def __init__(self):
@@ -16,6 +17,9 @@ class Game:
         print("random : ", self.unite.metier)
         self.unite_Mineur = Mineur(self.carte, self.metiers)
         print( "mineur :" ,self.unite_Mineur.metier)
+        self.groupeUnite = GroupeUnite(0,0)
+        self.groupeUnite.ajouterUnite(self.unite)
+        self.groupeUnite.ajouterUnite(self.unite_Mineur)
     def draw(self):
         self.carte.afficher_unite(self.unite)
     def update(self):
