@@ -96,7 +96,7 @@ class Unite():
     
     def deplacerBas(self, carte):
         #verifier out of range
-        if self.pos_unit_x == carte.axe_x-1:
+        if self.pos_unit_x == carte.axe_y-1:
             print("Vous ne pouvez pas aller plus bas!")
         else:
             self.pos_unit_x += 1
@@ -110,7 +110,7 @@ class Unite():
 
     def deplacerDroite(self, carte):
         #verifier out of range
-        if self.pos_unit_y == carte.axe_y-1:
+        if self.pos_unit_y == carte.axe_x-1:
             print("Vous ne pouvez pas aller plus à droite!")
         else:
             self.pos_unit_y += 1
