@@ -1,0 +1,39 @@
+{
+    "Ressource": [
+        {
+            "name":"bois",
+            "nomenclature":"B",
+            "pourcentage" : 0.15,
+            "recolte": 1,
+            "metierid": "1"
+        }
+        ,{
+            "name":"pierre",
+            "nomenclature":"P",
+            "pourcentage" : 0.1,
+            "recolte": 1,
+            "metierid": "2"
+        },
+        {
+            "name":"or",
+            "nomenclature":"O",
+            "pourcentage" : 0.05,
+            "recolte": 0.5,
+            "metierid": "2"
+        },
+        {
+            "name":"Nourriture",
+            "nomenclature":"N",
+            "pourcentage" : 0.25,
+            "recolte": 2,
+            "metierid": "3"
+        },
+        {
+            "name":"Argent",
+            "nomenclature":"A",
+            "pourcentage" : 0.07,
+            "recolte": 1,
+            "metierid": "2"
+        }
+    ]
+}

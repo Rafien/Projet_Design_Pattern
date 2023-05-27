@@ -1,10 +1,8 @@
 import random
 #Ressources foutre en enum pour pouvoir avoir plusieurs ressources par metiers
-ressources = ["P", "B", "N"]
-pourcentages = [0.1, 0.15, 0.25]
 unite_aff = "U"
 class Carte:
-    def __init__(self,TAILLE_MIN,TAILLE_MAX):
+    def __init__(self,TAILLE_MIN,TAILLE_MAX,):
         #taille de la carte
         self.axe_x = random.randint(TAILLE_MIN,TAILLE_MAX)
         self.axe_y = random.randint(TAILLE_MIN,TAILLE_MAX)
@@ -22,7 +20,7 @@ class Carte:
         print("\n")
 
 #ajoute des ressources sur la carte en fonction du pourcentage donné
-    def ajouter_ressources(self):
+    def ajouter_ressources(self,ressources,pourcentages):
         hauteur = len(self.carte)
         largeur = len(self.carte[0])
         total_cases = hauteur * largeur
