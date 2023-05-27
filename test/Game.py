@@ -34,8 +34,3 @@ class Game:
             data = json.load(json_file)
         return data["Metiers"]
         
-    # def verifResIdMetier(self):
-    #     for id in self.ressources:
-    #         if id["metierid"] == self.unite.metier_index:
-    #             print("metier :" + self.unite.metier_index + "ressource :" + self.ressources[id]["nomenclature"])
-    #             return True

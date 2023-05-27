@@ -50,10 +50,13 @@ class Unite():
     
     # Vérifier si le métier du joueur correspond aux ressources
     def isBonMetier(self, carte, ressources):
-        if carte.index_ressource(self.pos_unit_x, self.pos_unit_y, ressources) == self.metier_index:
-            print("Vous avez le bon métier!")
-        # Si oui, retourner True
+        print("metier :", self.metier_index)
+        print(carte.idMetier_ressource(self.pos_unit_x, self.pos_unit_y, ressources))
+        if carte.idMetier_ressource(self.pos_unit_x, self.pos_unit_y, ressources) == str(self.metier_index):
             return True
+        else:
+            print("Vous n'avez pas le bon métier pour récolter cette ressource!")
+            return False
     
     def isSurCheval(self):
         self.surCheval = True

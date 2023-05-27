@@ -52,11 +52,11 @@ class Carte:
             if temp == ressources[i]["nomenclature"]:
                 return ressources[i]["nomenclature"]
 
-    def index_ressource(self, x , y, ressources):
+    def idMetier_ressource(self, x , y, ressources):
         temp = self.recuperer_ressource_de_string(x, y)
         for i in range(len(ressources)):
             if temp == ressources[i]["nomenclature"]:
-                return i
+                return ressources[i]["metierid"]
     
     def recuperer_ressource_de_string(self, x, y):
         if len(self.carte[x][y]) == 2:
