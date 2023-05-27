@@ -64,7 +64,7 @@ class Unite():
             self.Expert = True
 
     def seDeplacer(self, inventaire, carte):
-        for _ in range(self.vitesse):
+        for _ in range(self.vitesse_base):
         # lire la direction dans la console
             direction = input("Dans quelle direction voulez-vous aller? (h, b, g, d)")
             carte.supprimer_unite_carte(self)
