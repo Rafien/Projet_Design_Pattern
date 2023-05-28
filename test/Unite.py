@@ -1,3 +1,4 @@
+import math
 import random
 
 
@@ -252,7 +253,7 @@ class GroupeUnite():
 class DecorateurMonture(Unite):
     def seDeplacer(self, inventaire, carte, ressources):
         #Varialbes
-        deplacement_restants = self.vitesse_base * 1.5
+        deplacement_restants = math.floor(self.vitesse_base * 1.5)
         #Tant qu'il reste des déplacements
         for _ in range(self.vitesse_base):
         # lire la direction dans la console

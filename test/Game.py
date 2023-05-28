@@ -61,6 +61,8 @@ class Game:
         self.groupeUnite.ajouterUnite(self.unite_Bucheron)
         self.groupeUnite.ajouterUnite(self.unite_Mineur)
         # print(self.groupeUnite)
+        self.testMonture = DecorateurMonture(self.unite_Mineur, Outil(1), self.id_unite, 1, 0)
+        self.testMonture.seDeplacer(self.inventory, self.carte, self.ressources)
 
         
     #Premier affichage
