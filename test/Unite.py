@@ -319,3 +319,25 @@ class DecorateurMonture(Unite):
                 else:
                     print("Vous n'avez pas assez de nourriture pour vous deplacer!")
                     return False
+                
+class DecorateurExpert(Unite):
+    def rammasserRessources(self, inventaire, carte, ressources):
+        if self.isOnRessourcesRecuperables(carte, ressources):
+            # Ajouter les ressources au stock (a modifier (mettre le bon nombre de ressources))
+            inventaire.addressources(carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources), 2)
+            # Supprimer les ressources de la case
+            print("Vous avez ramassé "+ carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources) +"!")
+            # for ress in inventaire.inventory:
+            #     print("Vous avez "+ str(ress.quantity) + str(ress.nomenc))
+            carte.supprimer_ressource(self.pos_unit_x, self.pos_unit_y, self)
+            # Augmenter l'xp
+            self.augmenterXp(GAIN_XP_RECOLTE)
+            print("Vous avez maintenant "+ str(self.xp) +" xp!")
+            return 0
+    
+    def PerteExpert(self):
+        if self.toursSansManger > 5:
+            self.Expert = False
+            self.xp = 0
+            #supprimer le decorateur
+            pass

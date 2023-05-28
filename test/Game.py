@@ -38,18 +38,28 @@ class Game:
         
 
         #tests
+        #unite
         self.unite_Paysan = Paysan(self.metiers[2]["metierid"], Outil(2), self.id_unite, 0 , 0)
         self.liste_unite.append(self.unite_Paysan)
         self.id_unite = len(self.liste_unite)
 
         self.unite_Bucheron = Bucheron(self.metiers[0]["metierid"], Outil(0), self.id_unite, 0, 1)
-        self.id_unite = len(self.liste_unite)
         self.liste_unite.append(self.unite_Bucheron)
+        self.id_unite = len(self.liste_unite)
+
 
         self.unite_Mineur = Mineur(self.metiers[1]["metierid"], Outil(1), self.id_unite, 1, 0)
         self.liste_unite.append(self.unite_Mineur)
         self.id_unite = len(self.liste_unite)
-        
+
+        #monture
+        self.testMonture = DecorateurMonture(self.unite_Mineur, Outil(1), self.unite_Mineur.id_unite, 1, 0)
+        self.liste_unite[self.testMonture.id_unite] = self.testMonture
+        # self.testMonture.seDeplacer(self.inventory, self.carte, self.ressources)
+
+        #expert
+        self.testExpert = DecorateurExpert(self.unite_Bucheron, Outil(0), self.unite_Bucheron.id_unite, 0, 1)
+        #batiment
         self.BatimentCreaMineur = Createurs("CreaMineur", 1, (2,2))
         # print("BatimentCreaMineur : ", self.BatimentCreaMineur)
         # print(self.liste_unite)
@@ -57,12 +67,11 @@ class Game:
         # print(self.liste_unite)
         self.carte.afficherBatiment(self.BatimentCreaMineur)
 
+        #groupe unite
         self.groupeUnite = GroupeUnite(0,0)
         self.groupeUnite.ajouterUnite(self.unite_Bucheron)
         self.groupeUnite.ajouterUnite(self.unite_Mineur)
         # print(self.groupeUnite)
-        self.testMonture = DecorateurMonture(self.unite_Mineur, Outil(1), self.id_unite, 1, 0)
-        self.testMonture.seDeplacer(self.inventory, self.carte, self.ressources)
 
         
     #Premier affichage
@@ -78,6 +87,7 @@ class Game:
         for unite in self.liste_unite:
             self.afficherInventaire()
             self.carte.afficher_carte()
+            # affichage type metier bug sur decorateurs
             print(" vous deplacez l'unite : ", unite.id_unite , " de type : ", unite.metier)
             unite.seDeplacer(self.inventory, self.carte, self.ressources)
         #self.unite_Mineur.seDeplacer(self.inventory, self.carte, self.ressources)
