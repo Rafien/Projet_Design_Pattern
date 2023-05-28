@@ -66,23 +66,36 @@ class Unite():
             self.Expert = True
 
     def seDeplacer(self, inventaire, carte, ressources):
+        deplacement_restants = self.vitesse_base
         for _ in range(self.vitesse_base):
         # lire la direction dans la console
-            direction = input("Dans quelle direction voulez-vous aller? (h, b, g, d)")
+            direction = input("Dans quelle direction voulez-vous aller? (haut : h, bas : b, gauche :g, droite : d, rien : r)")
             carte.supprimer_unite_carte(self, ressources)
-        # si la direction est h
+        # si la direction est haut
+
             if direction == "h":
                 self.deplacerHaut()
-        # si la direction est b
+                deplacement_restants -= 1
+
+        # si la direction est bas
             elif direction == "b":
                 self.deplacerBas(carte)
-        # si la direction est g
+                deplacement_restants -= 1
+
+        # si la direction est gauche
             elif direction == "g":
                 self.deplacerGauche()
+                deplacement_restants -= 1
 
-        # si la direction est d
+        # si la direction est droite
             elif direction == "d":
                 self.deplacerDroite(carte)
+                deplacement_restants -= 1
+            
+        # si la direction est rien
+            elif direction == "r":
+                deplacement_restants = 0
+                break
             carte.afficher_unite(self)
             self.rammasserRessources(inventaire, carte, ressources)
 
@@ -170,10 +183,12 @@ class GroupeUnite():
         self.vitesse = 0
         for unite in self.listeUnite:
             self.vitesse += unite.vitesse_base
-        print("vitesse groupe : ", self.vitesse)
+        return self.vitesse
+        # print("vitesse groupe : ", self.vitesse)
     
     def calculerCoutNourriture(self):
         self.cout_nourriture = 0
         for unite in self.listeUnite:
             self.cout_nourriture += unite.cout_nourriture_base
-        print("cout_nourriture groupe : ", self.cout_nourriture)
+        return self.cout_nourriture
+        # print("cout_nourriture groupe : ", self.cout_nourriture)
