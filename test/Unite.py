@@ -36,8 +36,8 @@ class Unite():
             inventaire.addressources(carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources), 1)
             # Supprimer les ressources de la case
             print("Vous avez ramassé "+ carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources) +"!")
-            for ress in inventaire.inventory:
-                print("Vous avez "+ str(ress.quantity) + str(ress.nomenc))
+            # for ress in inventaire.inventory:
+            #     print("Vous avez "+ str(ress.quantity) + str(ress.nomenc))
             carte.supprimer_ressource(self.pos_unit_x, self.pos_unit_y, self)
             # Augmenter l'xp
             self.augmenterXp(GAIN_XP_RECOLTE)
@@ -46,24 +46,24 @@ class Unite():
     
     # Vérifier si la case contient des ressources récupérables
     def isOnRessourcesRecuperables(self, carte, ressources):
-        print("Vous êtes sur la case", self.pos_unit_x, self.pos_unit_y)
+        # print("Vous êtes sur la case", self.pos_unit_x, self.pos_unit_y)
         if self.isOnRessources(carte, ressources) and self.isBonMetier(carte, ressources):
             return True
         
     # Vérifier si la case contient des ressources
     def isOnRessources(self, carte, ressources):
         if carte.case_avec_ressources(self.pos_unit_x, self.pos_unit_y, ressources) == True:
-            print("Vous avez trouvé "+ carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources) +"!")
+            # print("Vous avez trouvé "+ carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources) +"!")
             return True
     
     # Vérifier si le métier du joueur correspond aux ressources
     def isBonMetier(self, carte, ressources):
-        print("metier :", self.metier_index)
-        print(carte.idMetier_ressource(self.pos_unit_x, self.pos_unit_y, ressources))
+        # print("metier :", self.metier_index)
+        # print(carte.idMetier_ressource(self.pos_unit_x, self.pos_unit_y, ressources))
         if carte.idMetier_ressource(self.pos_unit_x, self.pos_unit_y, ressources) == str(self.metier_index):
             return True
         else:
-            print("Vous n'avez pas le bon métier pour récolter cette ressource!")
+            # print("Vous n'avez pas le bon métier pour récolter cette ressource!")
             return False
     
     # Placement sur un cheval
@@ -82,7 +82,8 @@ class Unite():
         #Tant qu'il reste des déplacements
         for _ in range(self.vitesse_base):
         # lire la direction dans la console
-            print("Il vous reste "+ str(deplacement_restants) +" déplacements!")
+            carte.afficher_carte()
+            print("Il vous reste "+ str(deplacement_restants) +" déplacements! et " + str(inventaire.inventory[3].quantity) + " nourriture")
             direction = input("Dans quelle direction voulez-vous aller? (haut : h, bas : b, gauche :g, droite : d, rien : r)")
             
         # si la direction est haut
@@ -161,12 +162,12 @@ class Unite():
 
     def consommerNourriture(self, inventaire):
         for ress in inventaire.inventory:
-            print("Il vous reste "+ str(ress.quantity) + str(ress.nomenc))
+            # print("Il vous reste "+ str(ress.quantity) + str(ress.nomenc))
             if ress.nomenc == "N":
                 if ress.quantity >= self.cout_nourriture_base:
                     inventaire.suppressources("N",self.cout_nourriture_base)
                     self.toursSansManger = 0
-                    print("Il vous reste "+ str(ress.quantity) +" nourriture!")
+                    # print("Il vous reste "+ str(ress.quantity) +" nourriture!")
                     return True
                 else:
                     print("Vous n'avez pas assez de nourriture pour vous deplacer!")

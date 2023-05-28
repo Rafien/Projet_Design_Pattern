@@ -79,7 +79,6 @@ class Carte:
         elif len(self.carte[x][y]) >= 2:
             for i in range(len(self.carte[x][y])-1):
                 temp += (self.carte[x][y][i])
-            print(temp)
             self.carte[x][y] = temp
         # sinon je laisse vide
         else:
@@ -89,7 +88,6 @@ class Carte:
 
     #affiche une unité sur la carte a sa position 
     def afficher_unite(self, unite):
-        print(unite.pos_unit_x,unite.pos_unit_y)
         #si la case est vide
         if self.carte[unite.pos_unit_x][unite.pos_unit_y] == " ":
             # placer l'unite
@@ -97,7 +95,6 @@ class Carte:
         else:
             #placer l'unite sur la case avec les elements deja presents
             self.carte[unite.pos_unit_x][unite.pos_unit_y] = str(unite.id_unite) + self.carte[unite.pos_unit_x][unite.pos_unit_y]
-        self.afficher_carte()
 
     def supprimer_unite_carte(self, unite, ressources):
         if self.carte[unite.pos_unit_x][unite.pos_unit_y] != str(unite.id_unite):
@@ -118,4 +115,3 @@ class Carte:
     def afficherBatiment(self, batiment):
         x,y = batiment.pos
         self.carte[x][y] = "M"
-        self.afficher_carte()

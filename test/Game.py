@@ -24,8 +24,7 @@ class Game:
         self.outils = self.data["Outils"]
         self.inventory = inventory(self.ressources)
         self.inventory.addressources("N",NOURRITURE_AT_SPAWN)
-        for x in self.inventory.inventory:
-            print(x.nomenc, x.quantity)
+        
         #ressources
 
         ressource,pourcentage = self.getrespour()
@@ -52,15 +51,16 @@ class Game:
         self.id_unite = len(self.liste_unite)
         
         self.BatimentCreaMineur = Createurs("CreaMineur", 1, (2,2))
-        print("BatimentCreaMineur : ", self.BatimentCreaMineur)
-        print(self.liste_unite)
+        # print("BatimentCreaMineur : ", self.BatimentCreaMineur)
+        # print(self.liste_unite)
         self.BatimentCreaMineur.action(self.liste_unite, self.taille)
-        print(self.liste_unite)
+        # print(self.liste_unite)
         self.carte.afficherBatiment(self.BatimentCreaMineur)
 
         self.groupeUnite = GroupeUnite(0,0)
         self.groupeUnite.ajouterUnite(self.unite_Bucheron)
         self.groupeUnite.ajouterUnite(self.unite_Mineur)
+        # print(self.groupeUnite)
 
         
     #Premier affichage
@@ -74,6 +74,8 @@ class Game:
     def update(self):
         print("Tour de jeu : ", self.tourDeJeu)
         for unite in self.liste_unite:
+            self.afficherInventaire()
+            self.carte.afficher_carte()
             print(" vous deplacez l'unite : ", unite.id_unite , " de type : ", unite.metier)
             unite.seDeplacer(self.inventory, self.carte, self.ressources)
         #self.unite_Mineur.seDeplacer(self.inventory, self.carte, self.ressources)
@@ -82,6 +84,10 @@ class Game:
         
         return False
     
+    def afficherInventaire(self):
+        print("Inventory :")
+        for x in self.inventory.inventory:
+            print(x.name, ":", x.quantity)
     # recuperer les ressources dans le json
     def getdata(self):
         with open('data.json') as json_file:
