@@ -1,11 +1,8 @@
 from Carte import Carte
-from Unite import Unite
-from Unite import Mineur
-from Unite import Bucheron
-from Unite import Paysan
-from Unite import GroupeUnite
+from Unite import *
 from Outils import Outil
 from Inventory import inventory
+from Batiment import *
 import json
 
 TAILLE_MIN_MAP = 5
@@ -36,7 +33,7 @@ class Game:
 
         #gestion unite
         self.liste_unite = []
-        self.id_unite = 1
+        self.id_unite = len(self.liste_unite)
         # self.unite = Unite(self.carte, self.metiers, self.outils, random.randint(0,carte.axe_y-1), random.randint(0,carte.axe_x-1))
         # print("random : ", self.unite.metier)
         
@@ -44,16 +41,23 @@ class Game:
         #tests
         self.unite_Paysan = Paysan(self.metiers[2]["metierid"], Outil(2), self.id_unite, 0 , 0)
         self.liste_unite.append(self.unite_Paysan)
-        self.id_unite += 1
+        self.id_unite = len(self.liste_unite)
 
         self.unite_Bucheron = Bucheron(self.metiers[0]["metierid"], Outil(0), self.id_unite, 0, 1)
-        self.id_unite += 1
+        self.id_unite = len(self.liste_unite)
         self.liste_unite.append(self.unite_Bucheron)
 
         self.unite_Mineur = Mineur(self.metiers[1]["metierid"], Outil(1), self.id_unite, 1, 0)
         self.liste_unite.append(self.unite_Mineur)
-        self.id_unite += 1
+        self.id_unite = len(self.liste_unite)
         
+        self.BatimentCreaMineur = Createurs("CreaMineur", 1, (2,2))
+        print("BatimentCreaMineur : ", self.BatimentCreaMineur)
+        print(self.liste_unite)
+        self.BatimentCreaMineur.action(self.liste_unite, self.taille)
+        print(self.liste_unite)
+        self.carte.afficherBatiment(self.BatimentCreaMineur)
+
         self.groupeUnite = GroupeUnite(0,0)
         self.groupeUnite.ajouterUnite(self.unite_Bucheron)
         self.groupeUnite.ajouterUnite(self.unite_Mineur)

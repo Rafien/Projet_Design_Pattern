@@ -111,3 +111,11 @@ class Carte:
     #     if self.carte[x][y] != " " and self.carte[x][y] != self.type_ressource(x, y, ressources):
     #         print("il y a une unite")
     #         return True
+
+    def afficherGroupe(self):
+        pass
+
+    def afficherBatiment(self, batiment):
+        x,y = batiment.pos
+        self.carte[x][y] = "M"
+        self.afficher_carte()
