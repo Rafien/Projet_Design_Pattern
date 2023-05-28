@@ -4,19 +4,22 @@ outils = ["pioche", "hache", "houe"]
 
 class Unite():
     def __init__(self, carte, metiers, outil, id_unite):
+        self.id_unite = id_unite
         #Position
         self.pos_unit_x = random.randint(0,carte.axe_y-1)
         self.pos_unit_y = random.randint(0,carte.axe_x-1)
-        self.id_unite = id_unite
+        
         #Metier
         self.metier_index = random.randint(0,len(metiers)-1)
         self.metier = metiers[self.metier_index]["name"]
+        #Outil
         self.outil = outil
         self.niveau_outil = outil.niveau
         #Stats
         self.vitesse_base = 5
         self.cout_nourriture_base = 1
         self.xp = 0
+        self.toursSansManger = 0
         #decorateur
         self.surCheval = False
         self.Expert = False
@@ -58,17 +61,23 @@ class Unite():
             print("Vous n'avez pas le bon métier pour récolter cette ressource!")
             return False
     
-    def isSurCheval(self):
+    # Placement sur un cheval
+    def MettreSurCheval(self):
         self.surCheval = True
 
+    # Vérifier si l'unite est expert
     def isExpert(self):
         if self.xp >= 5:
             self.Expert = True
 
+    # Deplacement
     def seDeplacer(self, inventaire, carte, ressources):
+        #Varialbes
         deplacement_restants = self.vitesse_base
+        #Tant qu'il reste des déplacements
         for _ in range(self.vitesse_base):
         # lire la direction dans la console
+            print("Il vous reste "+ str(deplacement_restants) +" déplacements!")
             direction = input("Dans quelle direction voulez-vous aller? (haut : h, bas : b, gauche :g, droite : d, rien : r)")
             carte.supprimer_unite_carte(self, ressources)
         # si la direction est haut
@@ -179,6 +188,7 @@ class GroupeUnite():
         self.calculerVitesse()
         self.calculerCoutNourriture()
     
+    # calculer la vitesse du groupe
     def calculerVitesse(self):
         self.vitesse = 0
         for unite in self.listeUnite:
@@ -186,6 +196,7 @@ class GroupeUnite():
         return self.vitesse
         # print("vitesse groupe : ", self.vitesse)
     
+    # calculer le cout en nourriture du groupe
     def calculerCoutNourriture(self):
         self.cout_nourriture = 0
         for unite in self.listeUnite:

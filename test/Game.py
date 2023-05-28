@@ -8,17 +8,28 @@ from Outils import Outil
 import json
 class Game:
     def __init__(self):
+        self.tourDeJeu = 1
+        #carte
         self.carte = Carte(5,10)
         self.inventory = []
+        
+        #lire json
         self.ressources = self.getressource()
-        ressource,pourcentage = self.getrespour()
-        self.carte.ajouter_ressources(ressource,pourcentage)
         self.metiers = self.getMetiers()
         self.outils = self.getOutil()
+
+        #ressources
+        ressource,pourcentage = self.getrespour()
+        self.carte.ajouter_ressources(ressource,pourcentage)
+
+        #gestion unite
         self.liste_unite = []
         self.id_unite = 1
         # self.unite = Unite(self.carte, self.metiers, self.outils)
         # print("random : ", self.unite.metier)
+
+
+        #tests
         self.unite_Bucheron = Bucheron(self.carte, self.metiers, Outil(0, self.outils), self.id_unite)
         self.id_unite += 1
         self.liste_unite.append(self.unite_Bucheron)
@@ -29,23 +40,31 @@ class Game:
         self.groupeUnite.ajouterUnite(self.unite_Bucheron)
         self.groupeUnite.ajouterUnite(self.unite_Mineur)
         
+    #Premier affichage
     def draw(self):
-        
-        self.carte.afficher_unite(self.unite_Bucheron)
-        self.carte.afficher_unite(self.unite_Mineur)
+        for unite in self.liste_unite:
+            self.carte.afficher_unite(unite)
         # self.carte.verifPresenceUnite(self.unite_Bucheron.pos_unit_x, self.unite_Bucheron.pos_unit_y,self.ressources)
         # self.carte.verifPresenceUnite(self.unite_Mineur.pos_unit_x, self.unite_Mineur.pos_unit_y,self.ressources)
+
+    #Tour de jeu
     def update(self):
+        print("Tour de jeu : ", self.tourDeJeu)
         for unite in self.liste_unite:
             print(" vous deplacez l'unite : ", unite.id_unite , " de type : ", unite.metier)
             unite.seDeplacer(self.inventory, self.carte, self.ressources)
         #self.unite_Mineur.seDeplacer(self.inventory, self.carte, self.ressources)
+
+        self.tourDeJeu += 1
+        
         return False
+    
     # recuperer les ressources dans le json
     def getressource(self):
         with open('data.json') as json_file:
             data = json.load(json_file)
         return data["Ressource"]
+    
     # recuperer les ressources et les pourcentages
     def getrespour(self):
         pourc = []
@@ -55,11 +74,13 @@ class Game:
             pourc.append(result["pourcentage"])
         return nomenclature,pourc
     
+    # recuperer les metiers dans le json
     def getMetiers(self):
         with open('data.json') as json_file:
             data = json.load(json_file)
         return data["Metiers"]
-        
+
+    # recuperer les outils dans le json 
     def getOutil(self):
         with open('data.json') as json_file:
             data = json.load(json_file)

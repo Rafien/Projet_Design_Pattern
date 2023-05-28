@@ -83,9 +83,12 @@ class Carte:
     #affiche une unité sur la carte a sa position 
     def afficher_unite(self, unite):
         print(unite.pos_unit_x,unite.pos_unit_y)
+        #si la case est vide
         if self.carte[unite.pos_unit_x][unite.pos_unit_y] == " ":
+            # placer l'unite
             self.carte[unite.pos_unit_x][unite.pos_unit_y] = str(unite.id_unite)
         else:
+            #placer l'unite sur la case avec les elements deja presents
             self.carte[unite.pos_unit_x][unite.pos_unit_y] = str(unite.id_unite) + self.carte[unite.pos_unit_x][unite.pos_unit_y]
         self.afficher_carte()
 
