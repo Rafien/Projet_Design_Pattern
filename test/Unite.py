@@ -1,13 +1,11 @@
 import random
 
-outils = ["pioche", "hache", "houe"]
-
 class Unite():
-    def __init__(self, carte, metiers, outil, id_unite):
+    def __init__(self, metiers, outil, id_unite, x, y):
         self.id_unite = id_unite
         #Position
-        self.pos_unit_x = random.randint(0,carte.axe_y-1)
-        self.pos_unit_y = random.randint(0,carte.axe_x-1)
+        self.pos_unit_x = x
+        self.pos_unit_y = y
         
         #Metier
         self.metier_index = random.randint(0,len(metiers)-1)
@@ -88,6 +86,8 @@ class Unite():
                 if self.consommerNourritureDeplacement(inventaire):
                     self.deplacerHaut()
                     deplacement_restants -= 1
+                else:
+                    break
                 
 
         # si la direction est bas
@@ -95,18 +95,24 @@ class Unite():
                 if self.consommerNourritureDeplacement(inventaire):
                     self.deplacerBas(carte)
                     deplacement_restants -= 1
+                else:
+                    break
 
         # si la direction est gauche
             elif direction == "g":
                 if self.consommerNourritureDeplacement(inventaire):
                     self.deplacerGauche()
                     deplacement_restants -= 1
+                else:
+                    break
 
         # si la direction est droite
             elif direction == "d":
                 if self.consommerNourritureDeplacement(inventaire):
                     self.deplacerDroite(carte)
                     deplacement_restants -= 1
+                else:
+                    break
             
         # si la direction est rien
             elif direction == "r":
@@ -159,8 +165,8 @@ class Unite():
 
 
 class Bucheron(Unite):
-    def __init__(self, carte, metiers, outil, id_unite):
-        super().__init__(carte, metiers, outil, id_unite)
+    def __init__(self, metiers, outil, id_unite, x, y):
+        super().__init__(metiers, outil, id_unite, x, y)
         self.metier_index = 0
         self.metier = "Bucheron"
         self.outil = outil
@@ -169,8 +175,8 @@ class Bucheron(Unite):
         # print("outil : ", self.outil.name)
 
 class Mineur(Unite):
-    def __init__(self, carte, metiers, outil, id_unite):
-        super().__init__(carte, metiers, outil, id_unite)
+    def __init__(self, metiers, outil, id_unite, x, y):
+        super().__init__(metiers, outil, id_unite, x, y)
         self.metier_index = 1
         self.metier = "Mineur"
         self.outil = outil
@@ -180,8 +186,8 @@ class Mineur(Unite):
 
 
 class Paysan(Unite):
-    def __init__(self, carte, metiers, outil, id_unite):
-        super().__init__(carte, metiers, outil, id_unite)
+    def __init__(self, metiers, outil, id_unite, x, y):
+        super().__init__(metiers, outil, id_unite, x, y)
         self.metier_index = 2
         self.metier = "Paysan"
         self.outil = outil
