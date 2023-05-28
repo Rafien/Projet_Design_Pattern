@@ -78,7 +78,10 @@ class Unite():
     # Deplacement
     def seDeplacer(self, inventaire, carte, ressources):
         #Varialbes
-        deplacement_restants = self.vitesse_base
+        if self.surCheval:
+            deplacement_restants = self.vitesse_base * 1.5
+        else:
+            deplacement_restants = self.vitesse_base
         #Tant qu'il reste des déplacements
         for _ in range(self.vitesse_base):
         # lire la direction dans la console
@@ -161,11 +164,16 @@ class Unite():
             self.pos_unit_y += 1
 
     def consommerNourriture(self, inventaire):
+        if self.surCheval:
+            conso = self.cout_nourriture_base + 3
+        else:
+            conso = self.cout_nourriture_base
+        
         for ress in inventaire.inventory:
             # print("Il vous reste "+ str(ress.quantity) + str(ress.nomenc))
             if ress.nomenc == "N":
-                if ress.quantity >= self.cout_nourriture_base:
-                    inventaire.suppressources("N",self.cout_nourriture_base)
+                if ress.quantity >= conso:
+                    inventaire.suppressources("N", conso)
                     self.toursSansManger = 0
                     # print("Il vous reste "+ str(ress.quantity) +" nourriture!")
                     return True
@@ -239,3 +247,74 @@ class GroupeUnite():
             self.cout_nourriture += unite.cout_nourriture_base
         return self.cout_nourriture
         # print("cout_nourriture groupe : ", self.cout_nourriture)
+
+
+class DecorateurMonture(Unite):
+    def seDeplacer(self, inventaire, carte, ressources):
+        #Varialbes
+        deplacement_restants = self.vitesse_base * 1.5
+        #Tant qu'il reste des déplacements
+        for _ in range(self.vitesse_base):
+        # lire la direction dans la console
+            carte.afficher_carte()
+            print("Il vous reste "+ str(deplacement_restants) +" déplacements! et " + str(inventaire.inventory[3].quantity) + " nourriture")
+            direction = input("Dans quelle direction voulez-vous aller? (haut : h, bas : b, gauche :g, droite : d, rien : r)")
+            
+        # si la direction est haut
+
+            if direction == "h":
+                if self.consommerNourriture(inventaire):
+                    carte.supprimer_unite_carte(self, ressources)
+                    self.deplacerHaut()
+                    deplacement_restants -= 1
+                else:
+                    break
+                
+
+        # si la direction est bas
+            elif direction == "b":
+                if self.consommerNourriture(inventaire):
+                    carte.supprimer_unite_carte(self, ressources)
+                    self.deplacerBas(carte)
+                    deplacement_restants -= 1
+                else:
+                    break
+
+        # si la direction est gauche
+            elif direction == "g":
+                if self.consommerNourriture(inventaire):
+                    carte.supprimer_unite_carte(self, ressources)
+                    self.deplacerGauche()
+                    deplacement_restants -= 1
+                else:
+                    break
+
+        # si la direction est droite
+            elif direction == "d":
+                if self.consommerNourriture(inventaire):
+                    carte.supprimer_unite_carte(self, ressources)
+                    self.deplacerDroite(carte)
+                    deplacement_restants -= 1
+                else:
+                    break
+            
+        # si la direction est rien
+            elif direction == "r":
+                deplacement_restants = 0
+                break
+            carte.afficher_unite(self)
+            self.rammasserRessources(inventaire, carte, ressources)
+
+
+        def consommerNourriture(self, inventaire):
+            for ress in inventaire.inventory:
+                # print("Il vous reste "+ str(ress.quantity) + str(ress.nomenc))
+                if ress.nomenc == "N":
+                    if ress.quantity >= self.cout_nourriture_base + 3:
+                        inventaire.suppressources("N", self.cout_nourriture_base + 3)
+                        self.toursSansManger = 0
+                        # print("Il vous reste "+ str(ress.quantity) +" nourriture!")
+                        return True
+                    else:
+                        print("Vous n'avez pas assez de nourriture pour vous deplacer!")
+                        return False
