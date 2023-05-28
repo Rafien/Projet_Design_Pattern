@@ -59,11 +59,7 @@ class Carte:
     
 
     def recuperer_ressource_de_string(self, x, y):
-        if len(self.carte[x][y]) == 2:
-            return self.recuperer_2nd_de_string(x, y)
-            
-        elif len(self.carte[x][y]) == 3:
-            return self.recuperer_3em_de_string(x, y)
+        return self.carte[x][y][len(self.carte[x][y])-1]
 
 
     def recuperer_2nd_de_string(self, x, y):
@@ -75,14 +71,16 @@ class Carte:
 
     
     def supprimer_ressource(self, x , y, unite):
+        temp = ""
         # si j'ai une unité je laisse l'unite
         if self.carte[x][y] == str(unite.id_unite):
             self.carte[x][y] = str(unite.id_unite)
         # si j'ai une unite et une ressource je laisse l'unite
-        elif len(self.carte[x][y]) == 2:
-            self.carte[x][y] = str(unite.id_unite)
-        elif len(self.carte[x][y]) == 3:
-            self.carte[x][y] = str(unite.id_unite) + self.recuperer_2nd_de_string(x, y)
+        elif len(self.carte[x][y]) >= 2:
+            for i in range(len(self.carte[x][y])-1):
+                temp += (self.carte[x][y][i])
+            print(temp)
+            self.carte[x][y] = temp
         # sinon je laisse vide
         else:
             self.carte[x][y] = " "
