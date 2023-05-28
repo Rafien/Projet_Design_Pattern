@@ -33,6 +33,8 @@ class Game:
         
         self.carte.afficher_unite(self.unite_Bucheron)
         self.carte.afficher_unite(self.unite_Mineur)
+        # self.carte.verifPresenceUnite(self.unite_Bucheron.pos_unit_x, self.unite_Bucheron.pos_unit_y,self.ressources)
+        # self.carte.verifPresenceUnite(self.unite_Mineur.pos_unit_x, self.unite_Mineur.pos_unit_y,self.ressources)
     def update(self):
         for unite in self.liste_unite:
             print(" vous deplacez l'unite : ", unite.id_unite , " de type : ", unite.metier)

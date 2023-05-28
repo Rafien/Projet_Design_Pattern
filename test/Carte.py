@@ -95,3 +95,8 @@ class Carte:
             self.carte[unite.pos_unit_x][unite.pos_unit_y] = self.type_ressource(unite.pos_unit_x, unite.pos_unit_y, ressources)
         else:
             self.carte[unite.pos_unit_x][unite.pos_unit_y] = " "
+
+    def verifPresenceUnite(self, x, y, ressources):
+        if self.carte[x][y] != " " and self.carte[x][y] != self.type_ressource(x, y, ressources):
+            print("il y a une unite")
+            return True
