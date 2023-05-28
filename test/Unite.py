@@ -306,15 +306,15 @@ class DecorateurMonture(Unite):
             self.rammasserRessources(inventaire, carte, ressources)
 
 
-        def consommerNourriture(self, inventaire):
-            for ress in inventaire.inventory:
-                # print("Il vous reste "+ str(ress.quantity) + str(ress.nomenc))
-                if ress.nomenc == "N":
-                    if ress.quantity >= self.cout_nourriture_base + 3:
-                        inventaire.suppressources("N", self.cout_nourriture_base + 3)
-                        self.toursSansManger = 0
-                        # print("Il vous reste "+ str(ress.quantity) +" nourriture!")
-                        return True
-                    else:
-                        print("Vous n'avez pas assez de nourriture pour vous deplacer!")
-                        return False
+    def consommerNourriture(self, inventaire):
+        for ress in inventaire.inventory:
+            # print("Il vous reste "+ str(ress.quantity) + str(ress.nomenc))
+            if ress.nomenc == "N":
+                if ress.quantity >= self.cout_nourriture_base + 3:
+                    inventaire.suppressources("N", self.cout_nourriture_base + 3)
+                    self.toursSansManger = 0
+                    # print("Il vous reste "+ str(ress.quantity) +" nourriture!")
+                    return True
+                else:
+                    print("Vous n'avez pas assez de nourriture pour vous deplacer!")
+                    return False
