@@ -21,9 +21,9 @@ class Game:
 
         self.outils = self.data["Outils"]
         self.inventory = inventory(self.ressources)
-        self.inventory.addressources("B",-5)
+        self.inventory.addressources("N",10)
         for x in self.inventory.inventory:
-            print(x.quantity)
+            print(x.nomenc, x.quantity)
         #ressources
 
         ressource,pourcentage = self.getrespour()

@@ -30,10 +30,11 @@ class Unite():
     def rammasserRessources(self, inventaire, carte, ressources):
         if self.isOnRessourcesRecuperables(carte, ressources):
             # Ajouter les ressources au stock (a modifier)
-            inventaire.append(carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources))
+            inventaire.addressources(carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources), 1)
             # Supprimer les ressources de la case
             print("Vous avez ramassé "+ carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources) +"!")
-            print("Vous avez maintenant "+ str(inventaire) +" ressources!")
+            for ress in inventaire.inventory:
+                print("Vous avez "+ str(ress.quantity) + str(ress.nomenc))
             carte.supprimer_ressource(self.pos_unit_x, self.pos_unit_y, self)
             # Augmenter l'xp
             self.xp += 1
@@ -84,23 +85,28 @@ class Unite():
         # si la direction est haut
 
             if direction == "h":
-                self.deplacerHaut()
-                deplacement_restants -= 1
+                if self.consommerNourritureDeplacement(inventaire):
+                    self.deplacerHaut()
+                    deplacement_restants -= 1
+                
 
         # si la direction est bas
             elif direction == "b":
-                self.deplacerBas(carte)
-                deplacement_restants -= 1
+                if self.consommerNourritureDeplacement(inventaire):
+                    self.deplacerBas(carte)
+                    deplacement_restants -= 1
 
         # si la direction est gauche
             elif direction == "g":
-                self.deplacerGauche()
-                deplacement_restants -= 1
+                if self.consommerNourritureDeplacement(inventaire):
+                    self.deplacerGauche()
+                    deplacement_restants -= 1
 
         # si la direction est droite
             elif direction == "d":
-                self.deplacerDroite(carte)
-                deplacement_restants -= 1
+                if self.consommerNourritureDeplacement(inventaire):
+                    self.deplacerDroite(carte)
+                    deplacement_restants -= 1
             
         # si la direction est rien
             elif direction == "r":
@@ -137,6 +143,19 @@ class Unite():
             print("Vous ne pouvez pas aller plus à droite!")
         else:
             self.pos_unit_y += 1
+
+    def consommerNourritureDeplacement(self, inventaire):
+        for ress in inventaire.inventory:
+            print("Il vous reste "+ str(ress.quantity) + str(ress.nomenc))
+            if ress.nomenc == "N":
+                if ress.quantity >= self.cout_nourriture_base:
+                    inventaire.suppressources("N",self.cout_nourriture_base)
+                    self.toursSansManger = 0
+                    print("Il vous reste "+ str(ress.quantity) +" nourriture!")
+                    return True
+                else:
+                    print("Vous n'avez pas assez de nourriture pour vous deplacer!")
+                    return False
 
 
 class Bucheron(Unite):
