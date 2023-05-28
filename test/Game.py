@@ -59,6 +59,7 @@ class Game:
 
         #expert
         self.testExpert = DecorateurExpert(self.unite_Bucheron, Outil(0), self.unite_Bucheron.id_unite, 0, 1)
+        self.liste_unite[self.testExpert.id_unite] = self.testExpert
         #batiment
         self.BatimentCreaMineur = Createurs("CreaMineur", 1, (2,2))
         # print("BatimentCreaMineur : ", self.BatimentCreaMineur)
