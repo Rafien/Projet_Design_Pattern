@@ -3,15 +3,15 @@ import random
 outils = ["pioche", "hache", "houe"]
 
 class Unite():
-    def __init__(self, carte, metiers, outils):
+    def __init__(self, carte, metiers, outil):
         #Position
         self.pos_unit_x = random.randint(0,carte.axe_y-1)
         self.pos_unit_y = random.randint(0,carte.axe_x-1)
         #Metier
         self.metier_index = random.randint(0,len(metiers)-1)
         self.metier = metiers[self.metier_index]["name"]
-        self.outil = outils[self.metier_index]
-        self.niveau_outil = 1
+        self.outil = outil
+        self.niveau_outil = outil.niveau
         #Stats
         self.vitesse_base = 5
         self.cout_nourriture_base = 1
@@ -116,31 +116,35 @@ class Unite():
 
 
 class Bucheron(Unite):
-    def __init__(self, carte, metiers, outils):
-        super().__init__(carte, metiers, outils)
+    def __init__(self, carte, metiers, outil):
+        super().__init__(carte, metiers, outil)
         self.metier_index = 0
         self.metier = "Bucheron"
-        self.outil = outils[self.metier_index]["name"]
+        self.outil = outil
         
-
+        # print("metier : ", self.metier)
+        # print("outil : ", self.outil.name)
 
 class Mineur(Unite):
-    def __init__(self, carte, metiers, outils):
-        super().__init__(carte, metiers, outils)
+    def __init__(self, carte, metiers, outil):
+        super().__init__(carte, metiers, outil)
         self.metier_index = 1
         self.metier = "Mineur"
-        self.outil = outils[self.metier_index]["name"]
+        self.outil = outil
 
-        print("metier : ", self.metier)
-        print("outil : ", self.outil)
+        # print("metier : ", self.metier)
+        # print("outil : ", self.outil.name)
 
 
 class Paysan(Unite):
-    def __init__(self, carte, metiers, outils):
-        super().__init__(carte, metiers, outils)
+    def __init__(self, carte, metiers, outil):
+        super().__init__(carte, metiers, outil)
         self.metier_index = 2
         self.metier = "Paysan"
-        self.outil = "houe"
+        self.outil = outil
+
+        # print("metier : ", self.metier)
+        # print("outil : ", self.outil.name)
 
 class GroupeUnite():
     def __init__(self, pos_x, pos_y):
