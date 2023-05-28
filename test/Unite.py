@@ -3,18 +3,16 @@ import random
 
 GAIN_XP_RECOLTE = 1
 XP_NEEDED_EXPERT = 5
-
-#fais que les unite recoivent l'id du metiers et pas le nom
 class Unite():
-    def __init__(self, metiers, outil, id_unite, x, y):
+    def __init__(self, metiersid, outil, id_unite, x, y):
         self.id_unite = id_unite
         #Position
         self.pos_unit_x = x
         self.pos_unit_y = y
         
         #Metier
-        self.metier_index = random.randint(0,len(metiers)-1)
-        self.metier = metiers[self.metier_index]["name"]
+        self.metier_index = metiersid
+        self.metier = ""
         #Outil
         self.outil = outil
         self.niveau_outil = outil.niveau
@@ -176,9 +174,9 @@ class Unite():
         
 
 class Bucheron(Unite):
-    def __init__(self, metiers, outil, id_unite, x, y):
-        super().__init__(metiers, outil, id_unite, x, y)
-        self.metier_index = 0
+    def __init__(self, metiersid, outil, id_unite, x, y):
+        super().__init__(metiersid, outil, id_unite, x, y)
+        self.metier_index = metiersid
         self.metier = "Bucheron"
         self.outil = outil
         
@@ -186,9 +184,9 @@ class Bucheron(Unite):
         # print("outil : ", self.outil.name)
 
 class Mineur(Unite):
-    def __init__(self, metiers, outil, id_unite, x, y):
-        super().__init__(metiers, outil, id_unite, x, y)
-        self.metier_index = 1
+    def __init__(self, metiersid, outil, id_unite, x, y):
+        super().__init__(metiersid, outil, id_unite, x, y)
+        self.metier_index = metiersid
         self.metier = "Mineur"
         self.outil = outil
 
@@ -197,9 +195,9 @@ class Mineur(Unite):
 
 
 class Paysan(Unite):
-    def __init__(self, metiers, outil, id_unite, x, y):
-        super().__init__(metiers, outil, id_unite, x, y)
-        self.metier_index = 2
+    def __init__(self, metiersid, outil, id_unite, x, y):
+        super().__init__(metiersid, outil, id_unite, x, y)
+        self.metier_index = metiersid
         self.metier = "Paysan"
         self.outil = outil
 

@@ -7,11 +7,16 @@ from Unite import GroupeUnite
 from Outils import Outil
 from Inventory import inventory
 import json
+
+TAILLE_MIN_MAP = 5
+TAILLE_MAX_MAP = 10
+NOURRITURE_AT_SPAWN = 10
+
 class Game:
     def __init__(self):
         self.tourDeJeu = 1
         #carte
-        self.carte = Carte(5,10)
+        self.carte = Carte(TAILLE_MIN_MAP,TAILLE_MAX_MAP)
         self.taille = (self.carte.axe_x,self.carte.axe_y)
         
         #lire json
@@ -21,7 +26,7 @@ class Game:
 
         self.outils = self.data["Outils"]
         self.inventory = inventory(self.ressources)
-        self.inventory.addressources("N",10)
+        self.inventory.addressources("N",NOURRITURE_AT_SPAWN)
         for x in self.inventory.inventory:
             print(x.nomenc, x.quantity)
         #ressources
@@ -37,15 +42,15 @@ class Game:
         
 
         #tests
-        self.unite_Paysan = Paysan(self.metiers, Outil(2), self.id_unite, 0 , 0)
+        self.unite_Paysan = Paysan(self.metiers[2]["metierid"], Outil(2), self.id_unite, 0 , 0)
         self.liste_unite.append(self.unite_Paysan)
         self.id_unite += 1
 
-        self.unite_Bucheron = Bucheron(self.metiers, Outil(0), self.id_unite, 0, 1)
+        self.unite_Bucheron = Bucheron(self.metiers[0]["metierid"], Outil(0), self.id_unite, 0, 1)
         self.id_unite += 1
         self.liste_unite.append(self.unite_Bucheron)
 
-        self.unite_Mineur = Mineur(self.metiers, Outil(1), self.id_unite, 1, 0)
+        self.unite_Mineur = Mineur(self.metiers[1]["metierid"], Outil(1), self.id_unite, 1, 0)
         self.liste_unite.append(self.unite_Mineur)
         self.id_unite += 1
         
