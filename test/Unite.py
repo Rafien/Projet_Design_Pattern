@@ -33,6 +33,7 @@ class Unite():
             inventaire.append(carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources))
             # Supprimer les ressources de la case
             print("Vous avez ramassé "+ carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources) +"!")
+            print("Vous avez maintenant "+ str(inventaire) +" ressources!")
             carte.supprimer_ressource(self.pos_unit_x, self.pos_unit_y, self)
             # Augmenter l'xp
             self.xp += 1
