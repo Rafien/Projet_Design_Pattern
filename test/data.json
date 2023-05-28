@@ -24,7 +24,7 @@
         {
             "name":"Nourriture",
             "nomenclature":"N",
-            "pourcentage" : 0.25,
+            "pourcentage" : 0.5,
             "recolte": 2,
             "metierid": "2"
         },

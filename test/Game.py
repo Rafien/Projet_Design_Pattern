@@ -37,12 +37,18 @@ class Game:
         
 
         #tests
+        self.unite_Paysan = Paysan(self.carte, self.metiers, Outil(2, self.outils), self.id_unite)
+        self.liste_unite.append(self.unite_Paysan)
+        self.id_unite += 1
+
         self.unite_Bucheron = Bucheron(self.carte, self.metiers, Outil(0, self.outils), self.id_unite)
         self.id_unite += 1
         self.liste_unite.append(self.unite_Bucheron)
+        
         self.unite_Mineur = Mineur(self.carte, self.metiers, Outil(1, self.outils), self.id_unite)
         self.liste_unite.append(self.unite_Mineur)
         self.id_unite += 1
+        
         self.groupeUnite = GroupeUnite(0,0)
         self.groupeUnite.ajouterUnite(self.unite_Bucheron)
         self.groupeUnite.ajouterUnite(self.unite_Mineur)

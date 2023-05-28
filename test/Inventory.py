@@ -7,7 +7,7 @@ class inventory:
 
     def creatres(self):
         for unity in self.ress:
-            self.inventory.append(Ressources(unity["name"],unity["nomenclature"],1))
+            self.inventory.append(Ressources(unity["name"],unity["nomenclature"],0))
     def addressources(self,nomenclature,quantity):
         for unity in self.inventory:
             if unity.nomenc == nomenclature:
