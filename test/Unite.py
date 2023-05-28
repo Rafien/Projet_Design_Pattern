@@ -79,11 +79,12 @@ class Unite():
         # lire la direction dans la console
             print("Il vous reste "+ str(deplacement_restants) +" déplacements!")
             direction = input("Dans quelle direction voulez-vous aller? (haut : h, bas : b, gauche :g, droite : d, rien : r)")
-            carte.supprimer_unite_carte(self, ressources)
+            
         # si la direction est haut
 
             if direction == "h":
                 if self.consommerNourritureDeplacement(inventaire):
+                    carte.supprimer_unite_carte(self, ressources)
                     self.deplacerHaut()
                     deplacement_restants -= 1
                 else:
@@ -93,6 +94,7 @@ class Unite():
         # si la direction est bas
             elif direction == "b":
                 if self.consommerNourritureDeplacement(inventaire):
+                    carte.supprimer_unite_carte(self, ressources)
                     self.deplacerBas(carte)
                     deplacement_restants -= 1
                 else:
@@ -101,6 +103,7 @@ class Unite():
         # si la direction est gauche
             elif direction == "g":
                 if self.consommerNourritureDeplacement(inventaire):
+                    carte.supprimer_unite_carte(self, ressources)
                     self.deplacerGauche()
                     deplacement_restants -= 1
                 else:
@@ -109,6 +112,7 @@ class Unite():
         # si la direction est droite
             elif direction == "d":
                 if self.consommerNourritureDeplacement(inventaire):
+                    carte.supprimer_unite_carte(self, ressources)
                     self.deplacerDroite(carte)
                     deplacement_restants -= 1
                 else:
