@@ -38,8 +38,7 @@ class Carte:
                     
 #return true si la case a des ressources 
     def case_avec_ressources(self, x , y, ressources):
-        temp = self.recuperer_2nd_de_string(x, y)
-        #print("Vous êtes sur la case", x, y)
+        temp = self.recuperer_ressource_de_string(x, y)
         for i in range(len(ressources)):
             if temp == ressources[i]["nomenclature"]:
                 #print("Vous avez trouvé "+ ressources[i] +"!")
@@ -47,24 +46,32 @@ class Carte:
         return False    
 #return le type de ressource sur la case             
     def type_ressource(self, x , y, ressources):
-        temp = self.recuperer_2nd_de_string(x, y)
+        temp = self.recuperer_ressource_de_string(x, y)
         for i in range(len(ressources)):
             if temp == ressources[i]["nomenclature"]:
                 return ressources[i]["nomenclature"]
 
     def idMetier_ressource(self, x , y, ressources):
-        temp = self.recuperer_2nd_de_string(x, y)
+        temp = self.recuperer_ressource_de_string(x, y)
         for i in range(len(ressources)):
             if temp == ressources[i]["nomenclature"]:
                 return ressources[i]["metierid"]
     
-    def recuperer_2nd_de_string(self, x, y):
+
+    def recuperer_ressource_de_string(self, x, y):
         if len(self.carte[x][y]) == 2:
-            #print(self.carte[x][y][1])
-            return self.carte[x][y][1]
-        else:
-            #print(self.carte[x][y][0])
-            return self.carte[x][y][0]
+            return self.recuperer_2nd_de_string(x, y)
+            
+        elif len(self.carte[x][y]) == 3:
+            return self.recuperer_3em_de_string(x, y)
+
+
+    def recuperer_2nd_de_string(self, x, y):
+        return self.carte[x][y][1]
+    
+    def recuperer_3em_de_string(self, x, y):
+        return self.carte[x][y][2]
+        
 
     
     def supprimer_ressource(self, x , y, unite):
@@ -72,8 +79,10 @@ class Carte:
         if self.carte[x][y] == str(unite.id_unite):
             self.carte[x][y] = str(unite.id_unite)
         # si j'ai une unite et une ressource je laisse l'unite
-        elif self.carte[x][y] != " ":
+        elif len(self.carte[x][y]) == 2:
             self.carte[x][y] = str(unite.id_unite)
+        elif len(self.carte[x][y]) == 3:
+            self.carte[x][y] = str(unite.id_unite) + self.recuperer_2nd_de_string(x, y)
         # sinon je laisse vide
         else:
             self.carte[x][y] = " "
