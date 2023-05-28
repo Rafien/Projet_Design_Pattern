@@ -1,5 +1,10 @@
 import random
 
+
+GAIN_XP_RECOLTE = 1
+XP_NEEDED_EXPERT = 5
+
+
 class Unite():
     def __init__(self, metiers, outil, id_unite, x, y):
         self.id_unite = id_unite
@@ -23,11 +28,13 @@ class Unite():
         self.Expert = False
         
 
-        
+    def augmenterXp(self, xp):
+        self.xp += xp
+        self.isExpert()
     
     def rammasserRessources(self, inventaire, carte, ressources):
         if self.isOnRessourcesRecuperables(carte, ressources):
-            # Ajouter les ressources au stock (a modifier)
+            # Ajouter les ressources au stock (a modifier (mettre le bon nombre de ressources))
             inventaire.addressources(carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources), 1)
             # Supprimer les ressources de la case
             print("Vous avez ramassé "+ carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources) +"!")
@@ -35,7 +42,7 @@ class Unite():
                 print("Vous avez "+ str(ress.quantity) + str(ress.nomenc))
             carte.supprimer_ressource(self.pos_unit_x, self.pos_unit_y, self)
             # Augmenter l'xp
-            self.xp += 1
+            self.augmenterXp(GAIN_XP_RECOLTE)
             print("Vous avez maintenant "+ str(self.xp) +" xp!")
             return 0
     
@@ -67,7 +74,7 @@ class Unite():
 
     # Vérifier si l'unite est expert
     def isExpert(self):
-        if self.xp >= 5:
+        if self.xp >= XP_NEEDED_EXPERT:
             self.Expert = True
 
     # Deplacement
@@ -83,7 +90,7 @@ class Unite():
         # si la direction est haut
 
             if direction == "h":
-                if self.consommerNourritureDeplacement(inventaire):
+                if self.consommerNourriture(inventaire):
                     carte.supprimer_unite_carte(self, ressources)
                     self.deplacerHaut()
                     deplacement_restants -= 1
@@ -93,7 +100,7 @@ class Unite():
 
         # si la direction est bas
             elif direction == "b":
-                if self.consommerNourritureDeplacement(inventaire):
+                if self.consommerNourriture(inventaire):
                     carte.supprimer_unite_carte(self, ressources)
                     self.deplacerBas(carte)
                     deplacement_restants -= 1
@@ -102,7 +109,7 @@ class Unite():
 
         # si la direction est gauche
             elif direction == "g":
-                if self.consommerNourritureDeplacement(inventaire):
+                if self.consommerNourriture(inventaire):
                     carte.supprimer_unite_carte(self, ressources)
                     self.deplacerGauche()
                     deplacement_restants -= 1
@@ -111,7 +118,7 @@ class Unite():
 
         # si la direction est droite
             elif direction == "d":
-                if self.consommerNourritureDeplacement(inventaire):
+                if self.consommerNourriture(inventaire):
                     carte.supprimer_unite_carte(self, ressources)
                     self.deplacerDroite(carte)
                     deplacement_restants -= 1
@@ -154,7 +161,7 @@ class Unite():
         else:
             self.pos_unit_y += 1
 
-    def consommerNourritureDeplacement(self, inventaire):
+    def consommerNourriture(self, inventaire):
         for ress in inventaire.inventory:
             print("Il vous reste "+ str(ress.quantity) + str(ress.nomenc))
             if ress.nomenc == "N":
@@ -166,7 +173,7 @@ class Unite():
                 else:
                     print("Vous n'avez pas assez de nourriture pour vous deplacer!")
                     return False
-
+        
 
 class Bucheron(Unite):
     def __init__(self, metiers, outil, id_unite, x, y):
