@@ -65,5 +65,20 @@
             "name":"Faux",
             "metierid": "2"
         }
+    ],
+    "Batiments":
+    [
+        {
+            "name": "Ferme",
+            "metierid": "2"
+        },
+        {
+            "name": "Mine",
+            "metierid": "1"
+        },
+        {
+            "name":"camp",
+            "metierid": "0"
+        }
     ]
 }

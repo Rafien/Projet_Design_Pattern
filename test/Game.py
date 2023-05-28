@@ -12,7 +12,7 @@ class Game:
         self.tourDeJeu = 1
         #carte
         self.carte = Carte(5,10)
-        
+        self.taille = (self.carte.axe_x,self.carte.axe_y)
         
         #lire json
         self.data = self.getdata()

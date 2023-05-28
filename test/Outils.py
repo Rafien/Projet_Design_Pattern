@@ -1,9 +1,8 @@
 
 
 class Outil():
-    def __init__(self, id, outils):
-        self.id = id
-        self.name = outils[id]["name"]
+    def __init__(self,metierid):
+        self.mid = metierid
         self.niveau = 1
 
     def ameliorer(self):

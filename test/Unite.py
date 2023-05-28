@@ -4,7 +4,7 @@ import random
 GAIN_XP_RECOLTE = 1
 XP_NEEDED_EXPERT = 5
 
-
+#fais que les unite recoivent l'id du metiers et pas le nom
 class Unite():
     def __init__(self, metiers, outil, id_unite, x, y):
         self.id_unite = id_unite
