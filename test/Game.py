@@ -5,20 +5,27 @@ from Unite import Bucheron
 from Unite import Paysan
 from Unite import GroupeUnite
 from Outils import Outil
+from Inventory import inventory
 import json
 class Game:
     def __init__(self):
         self.tourDeJeu = 1
         #carte
         self.carte = Carte(5,10)
-        self.inventory = []
+        
         
         #lire json
-        self.ressources = self.getressource()
-        self.metiers = self.getMetiers()
-        self.outils = self.getOutil()
+        self.data = self.getdata()
+        self.ressources = self.data["Ressource"]
+        self.metiers = self.data["Metiers"]
 
+        self.outils = self.data["Outils"]
+        self.inventory = inventory(self.ressources)
+        self.inventory.addressources("B",-5)
+        for x in self.inventory.inventory:
+            print(x.quantity)
         #ressources
+
         ressource,pourcentage = self.getrespour()
         self.carte.ajouter_ressources(ressource,pourcentage)
 
@@ -27,7 +34,7 @@ class Game:
         self.id_unite = 1
         # self.unite = Unite(self.carte, self.metiers, self.outils)
         # print("random : ", self.unite.metier)
-
+        
 
         #tests
         self.unite_Bucheron = Bucheron(self.carte, self.metiers, Outil(0, self.outils), self.id_unite)
@@ -39,6 +46,7 @@ class Game:
         self.groupeUnite = GroupeUnite(0,0)
         self.groupeUnite.ajouterUnite(self.unite_Bucheron)
         self.groupeUnite.ajouterUnite(self.unite_Mineur)
+
         
     #Premier affichage
     def draw(self):
@@ -60,10 +68,10 @@ class Game:
         return False
     
     # recuperer les ressources dans le json
-    def getressource(self):
+    def getdata(self):
         with open('data.json') as json_file:
             data = json.load(json_file)
-        return data["Ressource"]
+        return data
     
     # recuperer les ressources et les pourcentages
     def getrespour(self):
@@ -74,14 +82,3 @@ class Game:
             pourc.append(result["pourcentage"])
         return nomenclature,pourc
     
-    # recuperer les metiers dans le json
-    def getMetiers(self):
-        with open('data.json') as json_file:
-            data = json.load(json_file)
-        return data["Metiers"]
-
-    # recuperer les outils dans le json 
-    def getOutil(self):
-        with open('data.json') as json_file:
-            data = json.load(json_file)
-        return data["Outils"]

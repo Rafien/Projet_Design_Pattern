@@ -38,13 +38,17 @@
     ],
     "Metiers": [
         {
-            "name":"Bucheron"
+            "name":"Bucheron",
+            "metierid": 0
+
         },
         {
-            "name":"Mineur"
+            "name":"Mineur",
+            "metierid": 1
         },
         {
-            "name":"Paysan"
+            "name":"Paysan",
+            "metierid": 2
         }
 
     ],
