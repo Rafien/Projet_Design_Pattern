@@ -47,5 +47,19 @@
             "name":"Paysan"
         }
 
+    ],
+    "Outils": [
+        {
+            "name":"Hache",
+            "metierid": "0"
+        },
+        {
+            "name":"Pioche",
+            "metierid": "1"
+        },
+        {
+            "name":"Faux",
+            "metierid": "2"
+        }
     ]
 }

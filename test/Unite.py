@@ -3,7 +3,7 @@ import random
 outils = ["pioche", "hache", "houe"]
 
 class Unite():
-    def __init__(self, carte, metiers):
+    def __init__(self, carte, metiers, outils):
         #Position
         self.pos_unit_x = random.randint(0,carte.axe_y-1)
         self.pos_unit_y = random.randint(0,carte.axe_x-1)
@@ -116,24 +116,28 @@ class Unite():
 
 
 class Bucheron(Unite):
-    def __init__(self, carte, metiers):
-        super().__init__(carte, metiers)
+    def __init__(self, carte, metiers, outils):
+        super().__init__(carte, metiers, outils)
         self.metier_index = 0
         self.metier = "Bucheron"
-        self.outil = "hache"
+        self.outil = outils[self.metier_index]["name"]
+        
 
 
 class Mineur(Unite):
-    def __init__(self, carte, metiers):
-        super().__init__(carte, metiers)
+    def __init__(self, carte, metiers, outils):
+        super().__init__(carte, metiers, outils)
         self.metier_index = 1
         self.metier = "Mineur"
-        self.outil = "pioche"
+        self.outil = outils[self.metier_index]["name"]
+
+        print("metier : ", self.metier)
+        print("outil : ", self.outil)
 
 
 class Paysan(Unite):
-    def __init__(self, carte, metiers):
-        super().__init__(carte, metiers)
+    def __init__(self, carte, metiers, outils):
+        super().__init__(carte, metiers, outils)
         self.metier_index = 2
         self.metier = "Paysan"
         self.outil = "houe"

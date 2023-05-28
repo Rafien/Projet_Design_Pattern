@@ -4,6 +4,7 @@ from Unite import Mineur
 from Unite import Bucheron
 from Unite import Paysan
 from Unite import GroupeUnite
+from Outils import Outil
 import json
 class Game:
     def __init__(self):
@@ -13,10 +14,10 @@ class Game:
         ressource,pourcentage = self.getrespour()
         self.carte.ajouter_ressources(ressource,pourcentage)
         self.metiers = self.getMetiers()
-        self.unite = Unite(self.carte, self.metiers)
+        self.outils = self.getOutil()
+        self.unite = Unite(self.carte, self.metiers, self.outils)
         print("random : ", self.unite.metier)
-        self.unite_Mineur = Mineur(self.carte, self.metiers)
-        print( "mineur :" ,self.unite_Mineur.metier)
+        self.unite_Mineur = Mineur(self.carte, self.metiers, self.outils)
         self.groupeUnite = GroupeUnite(0,0)
         self.groupeUnite.ajouterUnite(self.unite)
         self.groupeUnite.ajouterUnite(self.unite_Mineur)
@@ -44,3 +45,7 @@ class Game:
             data = json.load(json_file)
         return data["Metiers"]
         
+    def getOutil(self):
+        with open('data.json') as json_file:
+            data = json.load(json_file)
+        return data["Outils"]
