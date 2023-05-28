@@ -67,13 +67,13 @@ class Carte:
             return self.carte[x][y][0]
 
     
-    def supprimer_ressource(self, x , y):
+    def supprimer_ressource(self, x , y, unite):
         # si j'ai une unité je laisse l'unite
-        if self.carte[x][y] == unite_aff:
-            self.carte[x][y] = unite_aff
+        if self.carte[x][y] == str(unite.id_unite):
+            self.carte[x][y] = str(unite.id_unite)
         # si j'ai une unite et une ressource je laisse l'unite
         elif self.carte[x][y] != " ":
-            self.carte[x][y] = unite_aff
+            self.carte[x][y] = str(unite.id_unite)
         # sinon je laisse vide
         else:
             self.carte[x][y] = " "
@@ -82,16 +82,15 @@ class Carte:
 
     #affiche une unité sur la carte a sa position 
     def afficher_unite(self, unite):
-        self.afficher_carte()
         print(unite.pos_unit_x,unite.pos_unit_y)
         if self.carte[unite.pos_unit_x][unite.pos_unit_y] == " ":
-            self.carte[unite.pos_unit_x][unite.pos_unit_y] = unite_aff
+            self.carte[unite.pos_unit_x][unite.pos_unit_y] = str(unite.id_unite)
         else:
-            self.carte[unite.pos_unit_x][unite.pos_unit_y] = unite_aff + self.carte[unite.pos_unit_x][unite.pos_unit_y]
+            self.carte[unite.pos_unit_x][unite.pos_unit_y] = str(unite.id_unite) + self.carte[unite.pos_unit_x][unite.pos_unit_y]
         self.afficher_carte()
 
     def supprimer_unite_carte(self, unite, ressources):
-        if self.carte[unite.pos_unit_x][unite.pos_unit_y] != unite_aff:
+        if self.carte[unite.pos_unit_x][unite.pos_unit_y] != str(unite.id_unite):
             #lire case et recuperer ressource
             self.carte[unite.pos_unit_x][unite.pos_unit_y] = self.type_ressource(unite.pos_unit_x, unite.pos_unit_y, ressources)
         else:

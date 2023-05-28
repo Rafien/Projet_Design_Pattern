@@ -15,15 +15,19 @@ class Game:
         self.carte.ajouter_ressources(ressource,pourcentage)
         self.metiers = self.getMetiers()
         self.outils = self.getOutil()
+        self.id_unite = 1
         # self.unite = Unite(self.carte, self.metiers, self.outils)
         # print("random : ", self.unite.metier)
-        self.unite_Bucheron = Bucheron(self.carte, self.metiers, Outil(0, self.outils))
-        self.unite_Mineur = Mineur(self.carte, self.metiers, Outil(1, self.outils))
+        self.unite_Bucheron = Bucheron(self.carte, self.metiers, Outil(0, self.outils), self.id_unite)
+        self.id_unite += 1
+        self.unite_Mineur = Mineur(self.carte, self.metiers, Outil(1, self.outils), self.id_unite)
         self.groupeUnite = GroupeUnite(0,0)
         self.groupeUnite.ajouterUnite(self.unite_Bucheron)
         self.groupeUnite.ajouterUnite(self.unite_Mineur)
+        
     def draw(self):
-        pass
+        
+        self.carte.afficher_unite(self.unite_Bucheron)
         self.carte.afficher_unite(self.unite_Mineur)
     def update(self):
         self.unite_Mineur.seDeplacer(self.inventory, self.carte, self.ressources)

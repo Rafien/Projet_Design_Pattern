@@ -3,10 +3,11 @@ import random
 outils = ["pioche", "hache", "houe"]
 
 class Unite():
-    def __init__(self, carte, metiers, outil):
+    def __init__(self, carte, metiers, outil, id_unite):
         #Position
         self.pos_unit_x = random.randint(0,carte.axe_y-1)
         self.pos_unit_y = random.randint(0,carte.axe_x-1)
+        self.id_unite = id_unite
         #Metier
         self.metier_index = random.randint(0,len(metiers)-1)
         self.metier = metiers[self.metier_index]["name"]
@@ -29,7 +30,7 @@ class Unite():
             inventaire.append(carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources))
             # Supprimer les ressources de la case
             print("Vous avez ramassé "+ carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources) +"!")
-            carte.supprimer_ressource(self.pos_unit_x, self.pos_unit_y)
+            carte.supprimer_ressource(self.pos_unit_x, self.pos_unit_y, self)
             # Augmenter l'xp
             self.xp += 1
             print("Vous avez maintenant "+ str(self.xp) +" xp!")
@@ -116,8 +117,8 @@ class Unite():
 
 
 class Bucheron(Unite):
-    def __init__(self, carte, metiers, outil):
-        super().__init__(carte, metiers, outil)
+    def __init__(self, carte, metiers, outil, id_unite):
+        super().__init__(carte, metiers, outil, id_unite)
         self.metier_index = 0
         self.metier = "Bucheron"
         self.outil = outil
@@ -126,8 +127,8 @@ class Bucheron(Unite):
         # print("outil : ", self.outil.name)
 
 class Mineur(Unite):
-    def __init__(self, carte, metiers, outil):
-        super().__init__(carte, metiers, outil)
+    def __init__(self, carte, metiers, outil, id_unite):
+        super().__init__(carte, metiers, outil, id_unite)
         self.metier_index = 1
         self.metier = "Mineur"
         self.outil = outil
@@ -137,8 +138,8 @@ class Mineur(Unite):
 
 
 class Paysan(Unite):
-    def __init__(self, carte, metiers, outil):
-        super().__init__(carte, metiers, outil)
+    def __init__(self, carte, metiers, outil, id_unite):
+        super().__init__(carte, metiers, outil, id_unite)
         self.metier_index = 2
         self.metier = "Paysan"
         self.outil = outil
