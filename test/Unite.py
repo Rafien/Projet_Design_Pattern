@@ -324,6 +324,9 @@ class DecorateurMonture(Unite):
                     return False
                 
 class DecorateurExpert(Unite):
+    def __init__(self, metierid, metiers, outil, id_unite, x, y):
+        super().__init__(metierid, metiers, outil, id_unite, x, y)
+        self.metier = metiers[metierid]["name"]
     def rammasserRessources(self, inventaire, carte, ressources):
         if self.isOnRessourcesRecuperables(carte, ressources):
             # Ajouter les ressources au stock (a modifier (mettre le bon nombre de ressources))
