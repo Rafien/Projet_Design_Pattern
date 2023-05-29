@@ -33,38 +33,41 @@ class Game:
         #gestion unite
         self.liste_unite = []
         self.id_unite = len(self.liste_unite)
-        # self.unite = Unite(self.carte, self.metiers, self.outils, random.randint(0,carte.axe_y-1), random.randint(0,carte.axe_x-1))
-        # print("random : ", self.unite.metier)
+        self.unite = Unite(1, self.metiers, Outil(1), self.id_unite, random.randint(0,self.carte.axe_y-1), random.randint(0,self.carte.axe_x-1))
+        self.liste_unite.append(self.unite)
+        self.id_unite = len(self.liste_unite)
         
 
         #tests
         #unite
-        self.unite_Paysan = Paysan(self.metiers[2]["metierid"], Outil(2), self.id_unite, 0 , 0)
+        self.unite_Paysan = Paysan(self.metiers[2]["metierid"], self.metiers, Outil(2), self.id_unite, 0 , 0)
         self.liste_unite.append(self.unite_Paysan)
         self.id_unite = len(self.liste_unite)
 
-        self.unite_Bucheron = Bucheron(self.metiers[0]["metierid"], Outil(0), self.id_unite, 0, 1)
+        self.unite_Bucheron = Bucheron(self.metiers[0]["metierid"], self.metiers, Outil(0), self.id_unite, 0, 1)
         self.liste_unite.append(self.unite_Bucheron)
         self.id_unite = len(self.liste_unite)
 
 
-        self.unite_Mineur = Mineur(self.metiers[1]["metierid"], Outil(1), self.id_unite, 1, 0)
+        self.unite_Mineur = Mineur(self.metiers[1]["metierid"], self.metiers, Outil(1), self.id_unite, 1, 0)
         self.liste_unite.append(self.unite_Mineur)
         self.id_unite = len(self.liste_unite)
 
         #monture
-        self.testMonture = DecorateurMonture(self.unite_Mineur, Outil(1), self.unite_Mineur.id_unite, 1, 0)
+        self.testMonture = DecorateurMonture(self.unite_Mineur.metier_index, self.metiers, Outil(1), self.unite_Mineur.id_unite, 1, 0)
         self.liste_unite[self.testMonture.id_unite] = self.testMonture
+        print(self.liste_unite)
+        print(self.testMonture.metier)
         # self.testMonture.seDeplacer(self.inventory, self.carte, self.ressources)
 
         #expert
-        self.testExpert = DecorateurExpert(self.unite_Bucheron, Outil(0), self.unite_Bucheron.id_unite, 0, 1)
-        self.liste_unite[self.testExpert.id_unite] = self.testExpert
+        #self.testExpert = DecorateurExpert(self.unite_Bucheron, self.metiers, Outil(0), self.unite_Bucheron.id_unite, 0, 1)
+        #self.liste_unite[self.testExpert.id_unite] = self.testExpert
         #batiment
         self.BatimentCreaMineur = Createurs("CreaMineur", 1, (2,2))
         # print("BatimentCreaMineur : ", self.BatimentCreaMineur)
         # print(self.liste_unite)
-        self.BatimentCreaMineur.action(self.liste_unite, self.taille)
+        self.BatimentCreaMineur.action(self.liste_unite, self.taille, self.metiers)
         # print(self.liste_unite)
         self.carte.afficherBatiment(self.BatimentCreaMineur)
 

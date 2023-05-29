@@ -29,11 +29,11 @@ class Createurs(Batiment):
     def __init__(self,name,metierid,pos):
         super().__init__(name,metierid,pos)
 
-    def action(self,unity,taille):
+    def action(self,unity,taille, metiers):
         x,y = self.pos
         xt,yt = taille
         if x + 1 < xt:
             x += 1
         else:
             x -= 1
-        unity.append(Unite(self.metierid,Outil(self.metierid),len(unity),x,y))
+        unity.append(Unite(self.metierid, metiers,Outil(self.metierid),len(unity),x,y))
