@@ -5,7 +5,7 @@ import random
 GAIN_XP_RECOLTE = 1
 XP_NEEDED_EXPERT = 5
 class Unite():
-    def __init__(self, metiersid, outil, id_unite, x, y):
+    def __init__(self, metiersid, metiers, outil, id_unite, x, y):
         self.id_unite = id_unite
         #Position
         self.pos_unit_x = x
@@ -13,7 +13,7 @@ class Unite():
         
         #Metier
         self.metier_index = metiersid
-        self.metier = ""
+        self.metier = metiers[metiersid]["name"]
         #Outil
         self.outil = outil
         self.niveau_outil = outil.niveau
@@ -184,9 +184,9 @@ class Unite():
         
 
 class Bucheron(Unite):
-    def __init__(self, metiersid, outil, id_unite, x, y):
-        super().__init__(metiersid, outil, id_unite, x, y)
-        self.metier_index = metiersid
+    def __init__(self, metiersid, metiers, outil, id_unite, x, y):
+        super().__init__(metiersid, metiers, outil, id_unite, x, y)
+        self.metier_index = 0
         self.metier = "Bucheron"
         self.outil = outil
         
@@ -194,9 +194,9 @@ class Bucheron(Unite):
         # print("outil : ", self.outil.name)
 
 class Mineur(Unite):
-    def __init__(self, metiersid, outil, id_unite, x, y):
-        super().__init__(metiersid, outil, id_unite, x, y)
-        self.metier_index = metiersid
+    def __init__(self, metiersid, metiers, outil, id_unite, x, y):
+        super().__init__(metiersid, metiers, outil, id_unite, x, y)
+        self.metier_index = 1
         self.metier = "Mineur"
         self.outil = outil
 
@@ -205,9 +205,9 @@ class Mineur(Unite):
 
 
 class Paysan(Unite):
-    def __init__(self, metiersid, outil, id_unite, x, y):
-        super().__init__(metiersid, outil, id_unite, x, y)
-        self.metier_index = metiersid
+    def __init__(self, metiersid, metiers, outil, id_unite, x, y):
+        super().__init__(metiersid, metiers, outil, id_unite, x, y)
+        self.metier_index = 2
         self.metier = "Paysan"
         self.outil = outil
 
@@ -251,6 +251,9 @@ class GroupeUnite():
 
 
 class DecorateurMonture(Unite):
+    def __init__(self, metierid, metiers, outil, id_unite, x, y):
+        super().__init__(metierid, metiers, outil, id_unite, x, y)
+        self.metier = metiers[metierid]["name"]
     def seDeplacer(self, inventaire, carte, ressources):
         #Varialbes
         deplacement_restants = math.floor(self.vitesse_base * 1.5)
