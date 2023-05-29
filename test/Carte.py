@@ -114,4 +114,4 @@ class Carte:
 
     def afficherBatiment(self, batiment):
         x,y = batiment.pos
-        self.carte[x][y] = "M"
+        self.carte[x][y] = "X"

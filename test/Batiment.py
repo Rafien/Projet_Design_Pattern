@@ -22,9 +22,10 @@ class Ameliorateur(Batiment):
     def action(self,unity):
         actual = unity[0]
         for ppl in unity:
-            if ppl.outils.niveau < actual.outils.niveau:
+            if ppl.outil.niveau < actual.outil.niveau:
                 actual = ppl
-        actual.outils.niveau += 1
+        actual.outil.niveau += 1
+        print("amelioration de l'outil de ",actual.id_unite)
 class Createurs(Batiment):
     def __init__(self,name,metierid,pos):
         super().__init__(name,metierid,pos)

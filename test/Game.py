@@ -70,13 +70,17 @@ class Game:
         # print(self.liste_unite)
         self.carte.afficherBatiment(self.BatimentCreaMineur)
 
-        print(self.liste_unite[3].metier)
+        self.BatimentAmelioPaysan = Ameliorateur("AmelioPaysan", 2, (5,5))
+        self.BatimentAmelioPaysan.action(self.liste_unite)
+        self.carte.afficherBatiment(self.BatimentAmelioPaysan)
+
+        # print(self.liste_unite[3].metier)
         #groupe unite
         self.groupeUnite = GroupeUnite(0,0)
         self.groupeUnite.ajouterUnite(self.unite_Bucheron)
         self.groupeUnite.ajouterUnite(self.unite_Mineur)
         # print(self.groupeUnite)
-        print(self.liste_unite)
+        # print(self.liste_unite)
 
         
     #Premier affichage
