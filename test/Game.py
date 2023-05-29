@@ -33,9 +33,9 @@ class Game:
         #gestion unite
         self.liste_unite = []
         self.id_unite = len(self.liste_unite)
-        self.unite = Unite(1, self.metiers, Outil(1), self.id_unite, random.randint(0,self.carte.axe_y-1), random.randint(0,self.carte.axe_x-1))
-        self.liste_unite.append(self.unite)
-        self.id_unite = len(self.liste_unite)
+        #self.unite = Unite(1, self.metiers, Outil(1), self.id_unite, random.randint(0,self.carte.axe_y-1), random.randint(0,self.carte.axe_x-1))
+        #self.liste_unite.append(self.unite)
+        #self.id_unite = len(self.liste_unite)
         
 
         #tests
@@ -56,14 +56,13 @@ class Game:
         #monture
         self.testMonture = DecorateurMonture(self.unite_Mineur.metier_index, self.metiers, Outil(1), self.unite_Mineur.id_unite, 1, 0)
         self.liste_unite[self.testMonture.id_unite] = self.testMonture
-        print(self.liste_unite)
-        print(self.testMonture.metier)
         # self.testMonture.seDeplacer(self.inventory, self.carte, self.ressources)
 
         #expert
-        #self.testExpert = DecorateurExpert(self.unite_Bucheron, self.metiers, Outil(0), self.unite_Bucheron.id_unite, 0, 1)
-        #self.liste_unite[self.testExpert.id_unite] = self.testExpert
+        self.testExpert = DecorateurExpert(self.unite_Bucheron.metier_index, self.metiers, Outil(0), self.unite_Bucheron.id_unite, 0, 1)
+        self.liste_unite[self.testExpert.id_unite] = self.testExpert
         #batiment
+        
         self.BatimentCreaMineur = Createurs("CreaMineur", 1, (2,2))
         # print("BatimentCreaMineur : ", self.BatimentCreaMineur)
         # print(self.liste_unite)
@@ -71,11 +70,13 @@ class Game:
         # print(self.liste_unite)
         self.carte.afficherBatiment(self.BatimentCreaMineur)
 
+        print(self.liste_unite[3].metier)
         #groupe unite
         self.groupeUnite = GroupeUnite(0,0)
         self.groupeUnite.ajouterUnite(self.unite_Bucheron)
         self.groupeUnite.ajouterUnite(self.unite_Mineur)
         # print(self.groupeUnite)
+        print(self.liste_unite)
 
         
     #Premier affichage

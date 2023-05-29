@@ -37,3 +37,4 @@ class Createurs(Batiment):
         else:
             x -= 1
         unity.append(Unite(self.metierid, metiers,Outil(self.metierid),len(unity),x,y))
+        
