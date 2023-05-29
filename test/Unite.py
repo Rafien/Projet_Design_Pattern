@@ -13,6 +13,7 @@ class Unite():
         
         #Metier
         self.metier_index = metiersid
+        self.list_metier = metiers
         self.metier = metiers[metiersid]["name"]
         #Outil
         self.outil = outil
@@ -75,7 +76,9 @@ class Unite():
     def isExpert(self):
         if self.xp >= XP_NEEDED_EXPERT:
             self.Expert = True
-
+            DecorateurExpert(self.metier_index, self.list_metier, self.outil, self.id_unite, self.pos_unit_x, self.pos_unit_y)
+            # update list unite
+            print("Cette unité est maintenant experte!")
     # Deplacement
     def seDeplacer(self, inventaire, carte, ressources):
         #Varialbes
@@ -325,8 +328,7 @@ class DecorateurMonture(Unite):
                 
 class DecorateurExpert(Unite):
     def __init__(self, metierid, metiers, outil, id_unite, x, y):
-        super().__init__(metierid, metiers, outil, id_unite, x, y)
-        self.metier = metiers[metierid]["name"]
+        super().__init__(metierid, metiers, outil, id_unite, x, y)      
     def rammasserRessources(self, inventaire, carte, ressources):
         if self.isOnRessourcesRecuperables(carte, ressources):
             # Ajouter les ressources au stock (a modifier (mettre le bon nombre de ressources))

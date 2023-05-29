@@ -59,7 +59,7 @@ class Game:
         # self.testMonture.seDeplacer(self.inventory, self.carte, self.ressources)
 
         #expert
-        self.testExpert = DecorateurExpert(self.unite_Bucheron.metier_index, self.metiers, Outil(0), self.unite_Bucheron.id_unite, 0, 1)
+        self.testExpert = DecorateurExpert(self.unite_Bucheron.metier_index, self.metiers, self.unite_Bucheron.outil, self.unite_Bucheron.id_unite, self.unite_Bucheron.pos_unit_x, self.unite_Bucheron.pos_unit_y)
         self.liste_unite[self.testExpert.id_unite] = self.testExpert
         #batiment
         
@@ -70,8 +70,8 @@ class Game:
         # print(self.liste_unite)
         self.carte.afficherBatiment(self.BatimentCreaMineur)
 
-        self.BatimentAmelioPaysan = Ameliorateur("AmelioPaysan", 2, (5,5))
-        self.BatimentAmelioPaysan.action(self.liste_unite)
+        self.BatimentAmelioPaysan = Ameliorateur("AmelioPaysan", 2, (4,4))
+        # self.BatimentAmelioPaysan.action(self.liste_unite)
         self.carte.afficherBatiment(self.BatimentAmelioPaysan)
 
         # print(self.liste_unite[3].metier)
@@ -99,6 +99,9 @@ class Game:
             # affichage type metier bug sur decorateurs
             print(" vous deplacez l'unite : ", unite.id_unite , " de type : ", unite.metier)
             unite.seDeplacer(self.inventory, self.carte, self.ressources)
+        print("Tour de jeu fini")
+        print("--------------------------------------------------")
+        print(self.liste_unite)
         #self.unite_Mineur.seDeplacer(self.inventory, self.carte, self.ressources)
 
         self.tourDeJeu += 1
