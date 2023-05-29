@@ -76,7 +76,7 @@ class Unite():
     def isExpert(self):
         if self.xp >= XP_NEEDED_EXPERT:
             self.Expert = True
-            DecorateurExpert(self.metier_index, self.list_metier, self.outil, self.id_unite, self.pos_unit_x, self.pos_unit_y)
+            temp = DecorateurExpert(self.metier_index, self.list_metier, self.outil, self.id_unite, self.pos_unit_x, self.pos_unit_y)
             # update list unite
             print("Cette unité est maintenant experte!")
     # Deplacement
