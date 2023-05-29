@@ -330,7 +330,7 @@ class DecorateurExpert(Unite):
     def rammasserRessources(self, inventaire, carte, ressources):
         if self.isOnRessourcesRecuperables(carte, ressources):
             # Ajouter les ressources au stock (a modifier (mettre le bon nombre de ressources))
-            inventaire.addressources(carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources), 2)
+            inventaire.addressources(carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources), (1 * self.outil.niveau) + 1)
             # Supprimer les ressources de la case
             print("Vous avez ramassé "+ carte.type_ressource(self.pos_unit_x, self.pos_unit_y, ressources) +"!")
             # for ress in inventaire.inventory:
